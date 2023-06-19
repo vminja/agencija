@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PolisaOsiguranjaController;
+use App\Http\Controllers\novi;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-///cao
+Route::get('/osiguranje', [PolisaOsiguranjaController::class, 'metoda']);
+
+// Route::get('/novi', [novi::class, 'test']);
