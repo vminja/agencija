@@ -15,4 +15,33 @@ class agencijaPolisa extends Model
         return $data;
 
     }
+
+    public function dodajPolisu($ime, $prezime, $datum, $telefon, $datumOd, $datumDo, $vrstaPolise){
+
+        $data = DB::table('polisa')->insert([
+            'ime' => $ime,
+            'prezime' => $prezime,
+            'datum_rodjenja' => $datum,
+            'telefon' => $telefon,
+            'datumPutovanja' => $datumOd,
+            'datumPovratka' => $datumDo,
+            'vrstaPolise' => $vrstaPolise
+        ]);
+
+        return ($data);
+    }
+
+    public function dodajOsiguranika($ime, $prezime, $datum, $polisaID){
+        $data = DB::table('osiguranici')->insert([
+            'ime' => $ime,
+            'prezime' => $prezime,
+            'datum_rodjenja' => $datum,
+            'polisaID' => $polisaID
+  //insert get id? 
+        ]);
+
+        return $data;
+    }
+
+
 }

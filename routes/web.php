@@ -21,4 +21,8 @@ Route::get('/', function () {
 
 Route::get('/osiguranje', [PolisaOsiguranjaController::class, 'metoda']);
 
-// Route::get('/novi', [novi::class, 'test']);
+Route::get('/osiguranje/dodajOsiguranika', [PolisaOsiguranjaController::class, 'dodavanjeOsiguranika']);
+
+Route::post('/osiguranje/dodajPolisu', [PolisaOsiguranjaController::class, 'dodajPolisu']);
+
+Route::post('/novi', [novi::class, 'test']);

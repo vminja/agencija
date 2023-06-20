@@ -5169,6 +5169,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5182,15 +5224,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      lista: [],
+      osiguranikItem: '',
+      ime: '',
+      prezime: '',
+      telefon: '',
+      imeOsiguranika: '',
+      prezimeOsiguranika: '',
+      selectedOption: '',
+      datumRodjenja: '',
+      datumRodjenjaOsiguranika: '',
       time1: '',
       time2: '',
       dateFormat: 'DD.MM.YYYY'
     };
   },
   methods: {
-    // formattedDate() {
-    //     return moment().format('DD.MM.YYYY.');
-    // },
     ukupnoDani: function ukupnoDani() {
       var ukupno = "";
       var datumOd = moment__WEBPACK_IMPORTED_MODULE_2___default()(this.time1);
@@ -5199,13 +5248,59 @@ __webpack_require__.r(__webpack_exports__);
         var razlika = datumDo.diff(datumOd);
         razlika = moment__WEBPACK_IMPORTED_MODULE_2___default().duration(razlika);
         return ukupno += razlika.days();
-      } else {
+      } else if (this.time1 != '' && this.time2 != '') {
+        this.time1 = '';
+        this.time2 = '';
         alert("Datum povratka ne moze biti manji od datuma putovanja!");
         return ukupno = "";
       }
-      //provera da li je prazan datepicker 
-      //range datepicker? proveriti i
-    }
+    },
+    kreirajOsiguranika: function kreirajOsiguranika() {
+      return this.selectedOption === 'grupno';
+    },
+    dodajNaListu: function dodajNaListu() {
+      var x = moment__WEBPACK_IMPORTED_MODULE_2___default()(this.datumRodjenjaOsiguranika).format('DD.MM.YYYY');
+      this.osiguranikItem = this.imeOsiguranika + ' ' + this.prezimeOsiguranika + '-' + x;
+      this.lista.push(this.osiguranikItem);
+    },
+    dodajPolisu: function dodajPolisu() {
+      var formData = {
+        ime: this.ime,
+        prezime: this.prezime,
+        datum: this.datumRodjenja,
+        telefon: this.telefon,
+        datumOd: this.time1,
+        datumDo: this.time2,
+        vrstaPolise: this.selectedOption,
+        osiguranik: this.lista
+      };
+      axios.post('/osiguranje/dodajPolisu', formData).then(function (response) {
+        // Handle the response from the Laravel controller
+        console.log(response.data);
+      })["catch"](function (error) {
+        // Handle any errors
+        console.error(error);
+      });
+    } // handleSubmit() {
+    //     const formData = {
+    //         ime: this.imeOsiguranika,
+    //         prezime: this.prezimeOsiguranika,
+    //         datum: this.datumRodjenjaOsiguranika,
+    //     };
+    //     axios.get('/osiguranje/dodajOsiguranika', formData)
+    //         .then(response => {
+    //         // Handle the response from the Laravel controller
+    //         console.log(response.data);
+    //         //dodaj metodu za prikaz u tabeli
+    //         })
+    //         .catch(error => {
+    //         // Handle any errors
+    //         console.error(error);
+    //         });
+    // },
+    // mounted() {
+    //     this.ukupnoDani();
+    // }
   }
 });
 
@@ -50230,9 +50325,132 @@ var render = function () {
       _vm._v(" "),
       _c(
         "form",
-        { staticClass: "border p-4 rounded", attrs: { method: "POST" } },
+        {
+          staticClass: "border p-4 rounded",
+          attrs: { method: "GET", action: "/osiguranje" },
+        },
         [
-          _vm._m(0),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col mb-3 mt-3" }, [
+              _c("label", { attrs: { for: "inputState" } }, [_vm._v("Ime")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.ime,
+                    expression: "ime",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  required: "",
+                  type: "text",
+                  placeholder: "Unesite ime",
+                },
+                domProps: { value: _vm.ime },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.ime = $event.target.value
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col mb-3 mt-3" }, [
+              _c("label", { attrs: { for: "inputState" } }, [
+                _vm._v("Prezime"),
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.prezime,
+                    expression: "prezime",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  required: "",
+                  type: "text",
+                  placeholder: "Unesite prezime",
+                },
+                domProps: { value: _vm.prezime },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.prezime = $event.target.value
+                  },
+                },
+              }),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col mb-3 mt-3" },
+              [
+                _c("label", { attrs: { for: "inputState" } }, [
+                  _vm._v("Datum rodjenja"),
+                ]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("date-picker", {
+                  attrs: { type: "date", format: _vm.dateFormat },
+                  model: {
+                    value: _vm.datumRodjenja,
+                    callback: function ($$v) {
+                      _vm.datumRodjenja = $$v
+                    },
+                    expression: "datumRodjenja",
+                  },
+                }),
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col mb-3 mt-3" }, [
+              _c("label", { attrs: { for: "inputState" } }, [
+                _vm._v("Telefon"),
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.telefon,
+                    expression: "telefon",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  required: "",
+                  type: "text",
+                  placeholder: "Unesite broj telefona",
+                },
+                domProps: { value: _vm.telefon },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.telefon = $event.target.value
+                  },
+                },
+              }),
+            ]),
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group mb-3" }, [
             _c("label", { attrs: { for: "inputState" } }, [
@@ -50241,15 +50459,39 @@ var render = function () {
             _vm._v(" "),
             _c(
               "select",
-              { staticClass: "form-control", attrs: { id: "inputState" } },
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.selectedOption,
+                    expression: "selectedOption",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: { id: "inputState" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.selectedOption = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                },
+              },
               _vm._l(_vm.data, function (item) {
                 return _c("option", [_vm._v(_vm._s(item.vrstaPolise))])
               }),
               0
             ),
           ]),
-          _vm._v(" "),
-          _vm._m(1),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
             _c("div", { staticClass: "row" }, [
@@ -50295,72 +50537,164 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _c("label", [_vm._v(_vm._s(_vm.ukupnoDani()))]),
+          _vm.ukupnoDani() >= 0
+            ? _c("label", { staticClass: "col mb-3 mt-3" }, [
+                _vm._v(_vm._s(_vm.ukupnoDani())),
+              ])
+            : _c("label", { staticClass: "col mb-3 mt-3 text-danger" }, [
+                _c("b", [_vm._v("Nepravilan izbor datuma")]),
+              ]),
           _vm._v(" "),
-          _vm._m(2),
+          _c("div", { staticClass: "row" }, [
+            _vm.kreirajOsiguranika()
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "card mb-3 mt-3",
+                    staticStyle: { width: "18rem" },
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "card-body p-3" },
+                      [
+                        _c("h3", [_vm._v("Osiguranik")]),
+                        _vm._v(" "),
+                        _c("label", { staticClass: "p-1" }, [_vm._v("Ime")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.imeOsiguranika,
+                              expression: "imeOsiguranika",
+                            },
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            required: "",
+                            type: "text",
+                            name: "ime",
+                            placeholder: "Unesite ime",
+                          },
+                          domProps: { value: _vm.imeOsiguranika },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.imeOsiguranika = $event.target.value
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("label", { staticClass: "p-1" }, [
+                          _vm._v("Prezime"),
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.prezimeOsiguranika,
+                              expression: "prezimeOsiguranika",
+                            },
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            required: "",
+                            type: "text",
+                            name: "prezime",
+                            placeholder: "Unesite prezime",
+                          },
+                          domProps: { value: _vm.prezimeOsiguranika },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.prezimeOsiguranika = $event.target.value
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          { staticClass: "p-1", attrs: { for: "inputState" } },
+                          [_vm._v("Datum rodjenja")]
+                        ),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("date-picker", {
+                          attrs: { type: "date", format: _vm.dateFormat },
+                          model: {
+                            value: _vm.datumRodjenjaOsiguranika,
+                            callback: function ($$v) {
+                              _vm.datumRodjenjaOsiguranika = $$v
+                            },
+                            expression: "datumRodjenjaOsiguranika",
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-body" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary m-1",
+                          on: { click: _vm.dodajNaListu },
+                        },
+                        [_vm._v("Dodaj osiguranika")]
+                      ),
+                    ]),
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "ul",
+              {
+                staticClass: "list-group list-group-flush m-2",
+                staticStyle: { width: "fit-content" },
+              },
+              _vm._l(_vm.lista, function (osiguranikItem) {
+                return _vm.kreirajOsiguranika()
+                  ? _c(
+                      "li",
+                      {
+                        staticClass: "list-group-item",
+                        staticStyle: { width: "fit-content" },
+                      },
+                      [_vm._v(_vm._s(osiguranikItem))]
+                    )
+                  : _vm._e()
+              }),
+              0
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success m-1",
+                attrs: { id: "dugme", type: "submit" },
+                on: { click: _vm.dodajPolisu },
+              },
+              [_vm._v("Sacuvaj")]
+            ),
+          ]),
         ]
       ),
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col mb-3 mt-3" }, [
-        _c("label", { attrs: { for: "inputState" } }, [_vm._v("Ime")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { required: "", type: "text", placeholder: "Unesite ime" },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col mb-3 mt-3" }, [
-        _c("label", { attrs: { for: "inputState" } }, [_vm._v("Prezime")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { required: "", type: "text", placeholder: "Unesite prezime" },
-        }),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group mb-3 mt-3" }, [
-      _c("label", { attrs: { for: "inputState" } }, [_vm._v("Telefon")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          required: "",
-          type: "text",
-          placeholder: "Unesite broj telefona",
-        },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          attrs: { id: "dugme", type: "submit" },
-        },
-        [_vm._v("Sacuvaj")]
-      ),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
