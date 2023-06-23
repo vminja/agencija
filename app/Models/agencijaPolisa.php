@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class agencijaPolisa extends Model
 {
+
+    protected $table = 'agencija_polisa';
+    protected $fillable = ['ime', 'prezime', 'datum', 'telefon', 'datum_od', 'datum_do', 'vrsta_polise', 'polisaID'];
+
     public function vrstaPolise(){
         $data = DB::table('polisa')->select('vrstaPolise')->where('vrstaPolise','!=', '')->distinct();
         $data = $data->get();
@@ -18,7 +22,7 @@ class agencijaPolisa extends Model
 
     public function dodajPolisu($ime, $prezime, $datum, $telefon, $datumOd, $datumDo, $vrstaPolise){
 
-        $data = DB::table('polisa')->insert([
+        $data = DB::table('polisa')->insertGetId([
             'ime' => $ime,
             'prezime' => $prezime,
             'datum_rodjenja' => $datum,
@@ -28,20 +32,27 @@ class agencijaPolisa extends Model
             'vrstaPolise' => $vrstaPolise
         ]);
 
-        return ($data);
+        return $data;
+
     }
 
     public function dodajOsiguranika($ime, $prezime, $datum, $polisaID){
+ 
         $data = DB::table('osiguranici')->insert([
+            'polisaID' =>  $polisaID,
             'ime' => $ime,
             'prezime' => $prezime,
-            'datum_rodjenja' => $datum,
-            'polisaID' => $polisaID
-  //insert get id? 
+            'datum_rodjenja' => $datum
+            
         ]);
 
         return $data;
+
     }
 
+    public function dodajOsiguranike($dataArr, $polisaID)
+    {
+        
+    }
 
 }

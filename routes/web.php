@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PolisaOsiguranjaController;
 use App\Http\Controllers\novi;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\AdminPanelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +23,12 @@ Route::get('/', function () {
 
 Route::get('/osiguranje', [PolisaOsiguranjaController::class, 'metoda']);
 
-Route::get('/osiguranje/dodajOsiguranika', [PolisaOsiguranjaController::class, 'dodavanjeOsiguranika']);
-
 Route::post('/osiguranje/dodajPolisu', [PolisaOsiguranjaController::class, 'dodajPolisu']);
 
-Route::post('/novi', [novi::class, 'test']);
+Route::get('/blog', [BlogController::class, 'metoda']);
+
+Route::get('/adminPanel', [AdminPanelController::class, 'metoda']);
+
+Route::get('/adminPanel/server', [AdminPanelController::class, 'metodaServer']);
+
+Route::get('/adminPanel/blog', [AdminPanelController::class, 'svePolise']);

@@ -25,7 +25,10 @@
     },
     "dependencies": {
         "bootstrap-vue": "^2.23.1",
+        "datatables.net-dt": "^1.13.4",
+        "jquery": "^3.7.0",
         "moment": "^2.29.4",
+        "sweetalert2": "^11.7.12",
         "vue2-datepicker": "^3.11.1"
     }
 }

@@ -1,5 +1,6 @@
-import 'bootstrap-vue/dist/bootstrap-vue.css';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css' 
+import 'bootstrap/dist/css/bootstrap.css'
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -25,6 +26,17 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 Vue.component('polisa', require('./components/Polisa.vue').default);
 
+Vue.component('polisa-prikaz', require('./components/PolisaPrikaz.vue').default);
+
+Vue.component('zaglavlje', require('./components/Zaglavlje.vue').default);
+
+Vue.component('blog', require('./components/Blog.vue').default);
+
+Vue.component('admin', require('./components/Admin.vue').default);
+//prikaz blogova
+
+Vue.component('admin-panel', require('./components/AdminPanelComp.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -34,3 +46,4 @@ Vue.component('polisa', require('./components/Polisa.vue').default);
 const app = new Vue({
     el: '#app',
 });
+

@@ -18,41 +18,49 @@ class PolisaOsiguranjaController extends Controller
     }
 
     public function dodajPolisu(Request $req){
-        $ime = $req->input('ime');
-        $prezime = $req->input('prezime');
-        $datum = Carbon::parse($req->input('datum'))->toDateString();
-        $telefon = $req->input('telefon');
-        $datumOd = Carbon::parse($req->input('datumOd'))->toDateString();
-        $datumDo = Carbon::parse($req->input('datumDo'))->toDateString();
-        $vrstaPolise = $req->input('vrstaPolise');
+        // dd($req);
+        $polisa = $req->input('polisaData');
+        $ime = $polisa['ime'];
+        $prezime = $polisa['prezime'];
+        $datum = Carbon::parse($polisa['datum'])->toDateString();
+        $telefon = $polisa['telefon'];
+        $datumOd = Carbon::parse($polisa['datumOd'])->toDateString();
+        $datumDo = Carbon::parse($polisa['datumDo'])->toDateString();
+        $vrstaPolise = $polisa['vrstaPolise'];
 
         $polisa = new agencijaPolisa;
-        $polisa->dodajPolisu($ime, $prezime, $datum, $telefon, $datumOd, $datumDo, $vrstaPolise);
+        $polisaID = $polisa->dodajPolisu($ime, $prezime, $datum, $telefon, $datumOd, $datumDo, $vrstaPolise);
 
-        //---------\\
+        $osiguranici = $req->input('osiguranici');
+        // $osiguraniciArr = [];
+        if($vrstaPolise === "grupno"){
+            foreach ($osiguranici as $osiguranikPolisa) {
+                $imeOsiguranika = $osiguranikPolisa['imeO'];
+                $prezimeOsiguranika = $osiguranikPolisa['prezimeO'];
+                $datumOsiguranika = $osiguranikPolisa['datumO'];
 
-        $imeO = $req->input($osiguranik['ime']);
-        $prezimeO = $req->input($osiguranik['prezime']);
-        $datumO = Carbon::parse($req->input($osiguranik['datum']))->toDateString();
-        $polisaID = 5 ;
-
-        $osiguranik = new agencijaPolisa;
-        $osiguranik->dodajOsiguranika($imeO, $prezimeO, $datumO, $polisaID);
+                $osiguranikPolisa = new agencijaPolisa;
+                // $osiguraniciArr;
+                $osiguranikPolisa->dodajOsiguranika($imeOsiguranika, $prezimeOsiguranika, $datumOsiguranika, $polisaID);
+            }
+        }
 
         return response()->json(['success' => true]);
+
 
     }
 
-    public function dodavanjeOsiguranika(Request $req){
-        $imeO = $req->input('ime');
-        $prezimeO = $req->input('prezime');
-        $datumO = Carbon::parse($req->input('datum'))->toDateString();
-        $polisaID = 5 ;
-        //insert get id? 
-
-        $osiguranik = new agencijaPolisa;
-        $osiguranik->dodajOsiguranika($ime, $prezime, $datum, $polisaID);
-
-        return response()->json(['success' => true]);
-    }
 }
+     // $osiguranikPolisa = $req->input('osiguranik');
+        // // dd($osiguranikPolisa);
+        // if($vrstaPolise === "grupno"){
+
+        //     $imeOsiguranika = $osiguranikPolisa['imeO'];
+        //     $prezimeOsiguranika = $osiguranikPolisa['prezimeO'];
+        //     $datumOsiguranika = $osiguranikPolisa['datumO'];
+
+        //     $osiguranikPolisa = new agencijaPolisa;
+        //     $osiguranikPolisa->dodajOsiguranika($imeOsiguranika, $prezimeOsiguranika, $datumOsiguranika, $polisaID);
+
+        // } 
+        // za jedan unos u tabelu osiguranici!
