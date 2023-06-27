@@ -17,7 +17,45 @@ class agencijaAdmin extends Model
         return $data;
     }
 
-    public function fetchDataTable($request){
+    public function sviOsiguranici($id){
+        $data = DB::table('osiguranici')->select("polisa.id", "polisa.ime", "polisa.prezime", "osiguranici.*")->leftJoin('polisa', 'osiguranici.polisaID', '=', 'polisa.id')->where('polisa.id', $id)->get();
+        //select('polisa.id','polisa.ime', 'polisa.prezime', 'osiguranici.ime', 'osiguranici.prezime', 'osiguranici.datum_rodjenja')
+        // dd($data);
+
+        return $data;
+    }
+
+    public function obrisiBlog($id){
+        $data = DB::table('posts')->where('posts.id', $id)->delete();
+        //select('polisa.id','polisa.ime', 'polisa.prezime', 'osiguranici.ime', 'osiguranici.prezime', 'osiguranici.datum_rodjenja')
+        // dd($data);
+
+        return $data;
+    }
+    
+    public function objaviBlog($id, $status, $datum){
+// dd($id,$status,$datum);
+        $data = DB::table('posts')->where('posts.id', $id)->update([
+            'Status' =>  $status,
+            'published_at' => $datum
+        ]);
+        //select('polisa.id','polisa.ime', 'polisa.prezime', 'osiguranici.ime', 'osiguranici.prezime', 'osiguranici.datum_rodjenja')
+        // dd($data);
+
+        return $data;
+    }
+
+    public function arhivirajBlog($id, $status, $datum){
+        // dd($id,$status,$datum);
+                $data = DB::table('posts')->where('posts.id', $id)->update([
+                    'Status' =>  $status,
+                    'archived_at' => $datum
+                ]);
+        
+                return $data;
+            }
+
+    public function blogoviDataTable($request){
         // dd($request);
         $start = isset($request['start']) ? $request['start'] : 0;
         $length = isset($request['length']) ? $request['length'] : 0;
@@ -81,7 +119,7 @@ class agencijaAdmin extends Model
         // dd($request);
         $start = isset($request['start']) ? $request['start'] : 0;
         $length = isset($request['length']) ? $request['length'] : 0;
-        $sort = 'autori.ime';
+        $sort = 'polisa.id';
         $sorting = 'asc';
         $search = isset($request['search']['value']) ? $request['search']['value'] : 0;
     

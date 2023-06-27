@@ -1,6 +1,6 @@
 <template>
     <div>
-      <zaglavlje></zaglavlje>
+      <!-- <zaglavlje></zaglavlje> -->
  
       <h1>Admin panel - prikaz polisa</h1>
         
@@ -17,11 +17,11 @@
 
     export default {
         props: {
-
+            data,
         },
         data(){
             return{
-
+                
             }
         },
         methods: {

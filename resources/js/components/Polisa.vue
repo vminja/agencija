@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
 
             <h2 class="m-3">Polisa osiguranja</h2>
-            <form class="border p-4 rounded" method="GET" action="/osiguranje">
+            <form class="border p-4 rounded" method="GET">
                     <div class="row">
                         <div class="col mb-3 mt-3">
                         <label for="inputState">Ime</label>
@@ -33,8 +33,9 @@
                         <label for="inputState">Vrsta osiguranja</label>
 
                         <select id="inputState"  name="osiguranje" class="form-control" v-model="selectedOption">
-                            <option  v-for="item in data">{{ item.vrstaPolise }}</option>
-                            
+                            <!-- <option  v-for="item in data">{{ item.vrstaPolise }}</option> -->
+                            <option>individualno</option>
+                            <option>grupno</option>
                         </select>
                     </div>
 
@@ -78,7 +79,7 @@
                     </div>
 
                     <div>
-                        <button id="dugme" type="submit" class="btn btn-success m-1" @click="dodajPolisu">Zavrsi kupovinu</button>
+                        <button id="dugme" type="button" class="btn btn-success m-1" @click="dodajPolisu">Zavrsi kupovinu</button>
                     </div>
                 </form>
 
@@ -87,12 +88,14 @@
 </template>
 
 <script>
+var csrfToken = $('meta[name="csrf-token"]').attr('content');
 import DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/index.css';
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import zaglavlje from './Zaglavlje.vue';
-
+import axios from "axios";
+import $ from "jquery";
 
 export default {
     components: {
@@ -100,8 +103,8 @@ export default {
         
     },
     props: {
-        data: {
-        },
+        // data: {
+        // },
     },
     data() {
         return {
@@ -202,9 +205,17 @@ export default {
                 };
             });
 
-            axios.post('/osiguranje/dodajPolisu', { polisaData, osiguranici })
+            axios.post('/osiguranje/dodajPolisu', { polisaData, osiguranici }, {
+                    headers: {
+                    'X-CSRF-TOKEN': csrfToken,
+                    },
+                })
                 .then(response => {
                     console.log(response.data);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Uspesna kupovina!',
+                    });
                     this.ime = '';
                     this.prezime = '';
                     this.datumRodjenja = '';

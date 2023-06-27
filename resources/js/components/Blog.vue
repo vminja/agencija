@@ -28,14 +28,13 @@
         },
         data() {
             return {
-                
             }
         },
         methods: {
-        formatDate(date) {
-            return moment(date).format('DD.MM.YYYY');
+          formatDate(date) {
+              return moment(date).format('DD.MM.YYYY');
+          },
         },
-    },
   };
   
 </script>

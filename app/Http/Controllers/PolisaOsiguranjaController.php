@@ -9,7 +9,11 @@ use App\Models\agencijaPolisa;
 
 class PolisaOsiguranjaController extends Controller
 {
-    public function metoda(){
+    public function prikaz(){
+        return view('osiguranje');
+    }
+
+    public function vrstaPolise(){
         $data = new agencijaPolisa;
         $data = $data->vrstaPolise();  
         // dd($data);

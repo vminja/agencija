@@ -1,1 +1,0 @@
-resources/views/novi.blade.php

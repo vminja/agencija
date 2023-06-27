@@ -20,15 +20,49 @@ use App\Http\Controllers\AdminPanelController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/osiguranje', [PolisaOsiguranjaController::class, 'prikaz']);
 
-Route::get('/osiguranje', [PolisaOsiguranjaController::class, 'metoda']);
+Route::post('/osiguranje', [PolisaOsiguranjaController::class, 'vrstaPolise']);
 
 Route::post('/osiguranje/dodajPolisu', [PolisaOsiguranjaController::class, 'dodajPolisu']);
 
-Route::get('/blog', [BlogController::class, 'metoda']);
-
 Route::get('/adminPanel', [AdminPanelController::class, 'metoda']);
+//admin dashboard 
 
-Route::get('/adminPanel/server', [AdminPanelController::class, 'metodaServer']);
 
-Route::get('/adminPanel/blog', [AdminPanelController::class, 'svePolise']);
+//
+
+Route::get('/adminPanel/polise', [AdminPanelController::class, 'svePolise']);
+
+Route::get('/adminPanel/polise/prikaz',[AdminPanelController::class, 'prikazPolisa']);
+
+Route::get('/adminPanel/polise/osiguranici', [AdminPanelController::class, 'sviOsiguranici']);
+
+Route::get('/adminPanel/blog/prikazBlog', [AdminPanelController::class, 'prikaziSveAdminBlog']);
+//admin prikaz svih blogova
+
+Route::post('/adminPanel/blog/obrisi', [AdminPanelController::class, 'obrisiBlog']);
+//admin brisanje iz tabele blogovi
+Route::post('/adminPanel/blog/objavi', [AdminPanelController::class, 'objaviBlog']);
+//objavljivanje blogova
+Route::post('/adminPanel/blog/arhiviraj', [AdminPanelController::class, 'arhivirajBlog']);
+//arhiviranje blogova
+
+
+Route::get('/blog', [BlogController::class, 'metoda']);
+//user prikaz postova/blogova
+
+Route::get('/adminPanel/blog/prikaz', [AdminPanelController::class, 'sviBlogovi']);
+
+Route::get('/adminPanel/blog/izmeniBlog/{id}', [BlogController::class, 'AdminBlogIzmeni']);
+
+Route::get('/adminPanel/blog/kreirajBlog', [BlogController::class, 'AdminBlog']);
+//user kreiranje posta
+
+Route::post('/adminPanel/blog/sacuvajIzmenuBloga', [BlogController::class, 'sacuvajIzmenuBlog']);
+
+Route::post('/adminPanel/blog/napraviBlog', [BlogController::class, 'napraviNoviBlog']);
+
+
+
+// Route::get('/adminPanel/blog', [AdminPanelController::class, 'sviBlogovi']);

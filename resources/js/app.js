@@ -32,10 +32,17 @@ Vue.component('zaglavlje', require('./components/Zaglavlje.vue').default);
 
 Vue.component('blog', require('./components/Blog.vue').default);
 
-Vue.component('admin', require('./components/Admin.vue').default);
+Vue.component('admin-blog', require('./components/AdminBlog.vue').default);
 //prikaz blogova
 
+Vue.component('admin-blog-kreiraj', require('./components/AdminBlogKreiraj.vue').default);
+
+Vue.component('admin-blog-izmeni', require('./components/AdminBlogIzmeni.vue').default);
+
 Vue.component('admin-panel', require('./components/AdminPanelComp.vue').default);
+
+Vue.component('menu-comp', require('./components/Menu.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

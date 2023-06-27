@@ -29,6 +29,7 @@
         "jquery": "^3.7.0",
         "moment": "^2.29.4",
         "sweetalert2": "^11.7.12",
-        "vue2-datepicker": "^3.11.1"
+        "vue2-datepicker": "^3.11.1",
+        "vue2-editor": "^2.10.3"
     }
 }
