@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -18,10 +19,10 @@ class agencijaAdmin extends Model
     }
 
     public function sviOsiguranici($id){
-        $data = DB::table('osiguranici')->select("polisa.id", "polisa.ime", "polisa.prezime", "osiguranici.*")->leftJoin('polisa', 'osiguranici.polisaID', '=', 'polisa.id')->where('polisa.id', $id)->get();
+        $data = DB::table('osiguranici')->select("polisa.id", "osiguranici.ime", "osiguranici.prezime", "osiguranici.datum_rodjenja")->leftJoin('polisa', 'osiguranici.polisaID', '=', 'polisa.id')->where('polisa.id', $id)->get();
         //select('polisa.id','polisa.ime', 'polisa.prezime', 'osiguranici.ime', 'osiguranici.prezime', 'osiguranici.datum_rodjenja')
         // dd($data);
-
+// dd($data);
         return $data;
     }
 
@@ -37,7 +38,7 @@ class agencijaAdmin extends Model
 // dd($id,$status,$datum);
         $data = DB::table('posts')->where('posts.id', $id)->update([
             'Status' =>  $status,
-            'published_at' => $datum
+            'published_at' => Carbon::parse($datum)->addHours(2)
         ]);
         //select('polisa.id','polisa.ime', 'polisa.prezime', 'osiguranici.ime', 'osiguranici.prezime', 'osiguranici.datum_rodjenja')
         // dd($data);
@@ -49,7 +50,7 @@ class agencijaAdmin extends Model
         // dd($id,$status,$datum);
                 $data = DB::table('posts')->where('posts.id', $id)->update([
                     'Status' =>  $status,
-                    'archived_at' => $datum
+                    'archived_at' => Carbon::parse($datum)->addHours(2)
                 ]);
         
                 return $data;
@@ -122,7 +123,7 @@ class agencijaAdmin extends Model
         $sort = 'polisa.id';
         $sorting = 'asc';
         $search = isset($request['search']['value']) ? $request['search']['value'] : 0;
-    
+        
         if (isset($request['order'][0]['column'])) {
             switch ($request['order'][0]['column']) {
                 case '0':
@@ -147,22 +148,18 @@ class agencijaAdmin extends Model
             $sorting = $request['order'][0]['dir'];
         }
     
-        // $data = DB::table('posts')->select('posts.naslov', 'posts.opis', 'posts.tipPosta' , 'posts.Status' , 'posts.tekst', 'posts.urlSlika', 'posts.published_at' , 'posts.created_at', 'posts.archived_at' ,  'autori.ime', 'autori.prezime')->leftJoin('autori', 'autori.id', '=', 'posts.autorID')->get();
-        // $SQLquery = $data->orderBy($sort, $sorting);
-        //->offset($start)->limit($length);
-    
-        $query = DB::table('polisa')->select('polisa.id','polisa.ime', 'polisa.prezime', 'polisa.telefon' , 'polisa.datum_rodjenja' , 'polisa.datumPutovanja', 'polisa.datumPovratka', 'polisa.vrstaPolise' ,  DB::raw('CONCAT(osiguranici.ime, " ", osiguranici.prezime, " ", osiguranici.datum_rodjenja) AS "kolona"'))->leftJoin('osiguranici', 'polisa.id', '=', 'osiguranici.polisaID');
-        // $query = DB::table('posts')->select('posts.naslov', 'posts.opis', 'posts.tipPosta', 'posts.Status', 'posts.tekst', 'posts.urlSlika', 'posts.published_at', 'posts.created_at', 'posts.archived_at', 'autori.ime', 'autori.prezime')->leftJoin('autori', 'autori.id', '=', 'posts.autorID');
-        // $query->get()->toArray();
-        // dd($query);
+        $query = DB::table('polisa')->select('polisa.id','polisa.ime', 'polisa.prezime', 'polisa.telefon' , 'polisa.datum_rodjenja' , 'polisa.datumPutovanja', 'polisa.datumPovratka', 'polisa.vrstaPolise')->leftJoin('osiguranici', 'polisa.id', '=', 'osiguranici.polisaID')->distinct('polisa.id');
         $query->orderBy($sort, $sorting);
 
         if(!empty($search)){
-            $query = $query->whereRaw("(polisa.ime LIKE '%{$search}%' OR polisa.prezime LIKE '%{$search}%')");
+            $query = $query->whereRaw("(polisa.datumPutovanja LIKE '%{$search}%' OR polisa.datumPovratka LIKE '%{$search}%' OR polisa.ime LIKE '%{$search}%' OR polisa.prezime LIKE '%{$search}%')");
         }
     
         $filter = $query->count();
+
         $result = $query->offset($start)->limit($length)->get();
+
+        //data bi trebalo posebno da se vrati??
         // return $result;
     
         return [

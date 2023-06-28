@@ -28,6 +28,25 @@ class BlogController extends Controller
         // return view("kreirajBlog");
         
       }
+      
+      public function AdminBlogPrikazi(Request $req){
+        // dd($req);
+                // $id = $req->url();
+                $url = $req->url();
+                $parsedUrl = parse_url($url);
+                $path = $parsedUrl['path'];
+                $id = basename($path);
+                // dd($id);
+                $data = new agencijaBlog;
+                $data = $data->postPrikaz($id);  
+        
+                // dd($data);
+        
+                return view('prikaziBlog', ['data' => $data]);
+        
+                // return view("kreirajBlog");
+                
+              }
 
       public function AdminBlogIzmeni(Request $req){
 // dd($req);

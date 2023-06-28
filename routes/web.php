@@ -56,6 +56,10 @@ Route::get('/adminPanel/blog/prikaz', [AdminPanelController::class, 'sviBlogovi'
 
 Route::get('/adminPanel/blog/izmeniBlog/{id}', [BlogController::class, 'AdminBlogIzmeni']);
 
+
+Route::get('/adminPanel/blog/prikaziIzabraniBlog/{id}', [BlogController::class, 'AdminBlogPrikazi']);
+
+
 Route::get('/adminPanel/blog/kreirajBlog', [BlogController::class, 'AdminBlog']);
 //user kreiranje posta
 

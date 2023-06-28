@@ -26,13 +26,13 @@ class PolisaOsiguranjaController extends Controller
         $polisa = $req->input('polisaData');
         $ime = $polisa['ime'];
         $prezime = $polisa['prezime'];
-        $datum = Carbon::parse($polisa['datum'])->toDateString();
+        $datum = Carbon::parse($polisa['datum'])->addDay()->toDateString();
         $telefon = $polisa['telefon'];
-        $datumOd = Carbon::parse($polisa['datumOd'])->toDateString();
-        $datumDo = Carbon::parse($polisa['datumDo'])->toDateString();
+        $datumOd = Carbon::parse($polisa['datumOd'])->addDay()->toDateString();
+        $datumDo = Carbon::parse($polisa['datumDo'])->addDay()->toDateString();
         $vrstaPolise = $polisa['vrstaPolise'];
 
-        $polisa = new agencijaPolisa;
+        $polisa = new agencijaPolisa; 
         $polisaID = $polisa->dodajPolisu($ime, $prezime, $datum, $telefon, $datumOd, $datumDo, $vrstaPolise);
 
         $osiguranici = $req->input('osiguranici');

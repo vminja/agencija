@@ -10,11 +10,25 @@
                 <a class="nav-link" href="/osiguranje">Putno osiguranje</a>
                 <a class="nav-link" href="/blog">Blog</a>
                 <a class="nav-link" href="/adminPanel">Admin panel</a>
-                <!-- <a class="nav-link disabled">Disabled</a> -->
+
+                <!-- <div class="btn-group dropend">
+                    <a type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin panel
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Polisa</a></li>
+                        <li><a class="dropdown-item" href="#">Blog action</a></li>
+                        <li><a class="dropdown-item" href="#">Korisnici</a></li>
+                    </ul>
+                </div> -->
+
+                
             </div>
-            </div>
+            </div> 
         </div>
+
     </nav>
+   
 </template>
 
 <script>

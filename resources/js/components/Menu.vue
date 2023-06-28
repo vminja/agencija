@@ -7,7 +7,7 @@
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span>Polisa</span>
                   </button>
-                </div>
+                </div> 
             </nav>
             <div class="collapse" id="navbarToggleExternalContent">
                 <div class="bg-success p-4">

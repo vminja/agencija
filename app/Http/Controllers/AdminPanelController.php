@@ -23,11 +23,14 @@ class AdminPanelController extends Controller
     }
     
     public function sviOsiguranici(Request $req){
-      $id = $req->input('id');
-        $data = new agencijaAdmin;
-        $data = $data->sviOsiguranici($id);  
+        $id = $req->input('id');
+        $model = new agencijaAdmin;
+        $data['podaci'] = $model->sviOsiguranici($id);  
+        $data['success'] = true;
+
       // dd($data);
 
+      // return response()->json(['success' => true])->setData($data);
       // return response()->json(['success' => true]);
         return json_encode($data);
     }
@@ -88,17 +91,19 @@ class AdminPanelController extends Controller
         $statusPosta ='Arhivirano';
         $todayDate = Carbon::now();
         $todayDate = date('Y-m-d H:i:s');
+        
         // dd($todayDate);
         // dd($id,$statusPosta);
 
           $data = new agencijaAdmin;
           $data = $data->arhivirajBlog($id, $statusPosta, $todayDate);  
-        
+  
         return response()->json(['success' => true]);
 
       }
       
       public function svePolise(Request $request){
+        // dump($request->all());
         $tabela = new agencijaAdmin;
         $sqlData = $tabela->poliseDataTable($request);
         // dd($sqlData);
@@ -108,6 +113,8 @@ class AdminPanelController extends Controller
         $data['data'] = $sqlData['data'];
         // dd($data);
         return json_encode($data);
+
       }
 
 }
+ 

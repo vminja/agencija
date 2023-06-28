@@ -18,7 +18,7 @@ class agencijaPolisa extends Model
 
         return $data;
 
-    }
+    } 
 
     public function dodajPolisu($ime, $prezime, $datum, $telefon, $datumOd, $datumDo, $vrstaPolise){
 

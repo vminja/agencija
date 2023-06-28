@@ -39,6 +39,8 @@ Vue.component('admin-blog-kreiraj', require('./components/AdminBlogKreiraj.vue')
 
 Vue.component('admin-blog-izmeni', require('./components/AdminBlogIzmeni.vue').default);
 
+Vue.component('admin-blog-prikazi', require('./components/AdminBlogPrikazi.vue').default);
+
 Vue.component('admin-panel', require('./components/AdminPanelComp.vue').default);
 
 Vue.component('menu-comp', require('./components/Menu.vue').default);

@@ -25,6 +25,7 @@
       
     </div>
 </template>
+
 <script>
 var csrfToken = $('meta[name="csrf-token"]').attr('content');
 //   import "jquery/dist/jquery.min.js";
@@ -109,7 +110,7 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
                                 return  '<div class="dropdown">' +
                                             '<button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown">Akcija</button>' +
                                             '<div class="dropdown-menu">'+
-                                                '<a  type="button" class="dropdown-item" href="#">Pregled</a>' +
+                                                '<a  type="button" class="dropdown-item" href="/adminPanel/blog/prikaziIzabraniBlog/' + row.id + '">Pregled</a>' +
                                                 '<a  type="button" class="dropdown-item" href="/adminPanel/blog/izmeniBlog/' + row.id + '">Izmeni</a>' +
                                                 '<a  type="button" class="dropdown-item obrisi" href="#"  data-entry-id="' + row.id + '">Obrisi</a>' +
                                                 '<a  type="button" class="dropdown-item objavi" href="#" data-entry-id="' + row.id + '">Objavi</a>'+
@@ -125,7 +126,8 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
             },
         },
         mounted() {
-            
+            let th = this;
+
             $(document).on('click', '.arhiviraj', function (e) {
                var entryId = $(this).data('entry-id');
 
@@ -143,12 +145,11 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
                     success: function(response) {
                         if (response.success) {
                             console.log('bravo');
+                            th.createDataTable();
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Uspesno ste arhivirali post!',
-                            });
-                           
-                        
+                                title: 'Uspesno ste arhivirali post!',                        
+                            })
                         }
                         else {
                             console.log('else', response);
@@ -158,6 +159,7 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
                         console.log(xhr.responseText);
                     },
                 });
+        
             });
 
             $(document).on('click', '.objavi', function (e) {
@@ -177,6 +179,7 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
                     success: function(response) {
                         if (response.success) {
                             console.log('bravo');
+                            th.createDataTable();
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Uspesno ste objavili post!',
@@ -192,12 +195,19 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
                         console.log(xhr.responseText);
                     },
                 });
+
             });
 
             $(document).on('click', '.obrisi', function (e) {
-                if (confirm("Da li ste sigurni?")) {
-                    e.preventDefault();
-                    var entryId = $(this).data('entry-id');
+
+                Swal.fire({
+                    title: 'Da li ste sigurni?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Obrisi',
+                    cancelButtonText: 'Odustani',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var entryId = $(this).data('entry-id');
 
                     $.ajax({
                         url: '/adminPanel/blog/obrisi',
@@ -213,13 +223,12 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
                         success: function(response) {
                             if (response.success) {
                                 console.log('bravo');
-                                // this.createDataTable();
+                                th.createDataTable();
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Uspesno ste obrisali post!',
                                 });
-                            
-                            
+
                             }
                             else {
                                 console.log('else', response);
@@ -229,7 +238,8 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
                             console.log(xhr.responseText);
                         },
                     });
-                }
+                    }
+                })
             });
          
             this.createDataTable();

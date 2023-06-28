@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -11,10 +12,18 @@ class agencijaBlog extends Model
     use HasFactory;
 
     public function postovi(){
-        $data = DB::table('posts')->select('posts.naslov', 'posts.tekst', 'posts.urlSlika', 'posts.published_at', 'autori.ime', 'autori.prezime')->leftJoin('autori', 'autori.id', '=', 'posts.autorID')->get();
+        $data = DB::table('posts')->select('posts.id','posts.naslov', 'posts.tekst', 'posts.opis', 'posts.urlSlika', 'posts.published_at', 'autori.ime', 'autori.prezime')->leftJoin('autori', 'autori.id', '=', 'posts.autorID')->get();
         // dd($data);  DB::raw('SUBSTRING(posts.urlSlika,6,100)')
 
         return $data;
+    }
+
+    public function postPrikaz($id){
+
+        $query =  DB::table('posts')->select('posts.id','posts.naslov', 'posts.opis', 'posts.created_at', 'posts.tipPosta' , 'posts.tekst', 'posts.urlSlika' ,  DB::raw('CONCAT(autori.ime, " ", autori.prezime) AS "kolona"'))->leftJoin('autori', 'autori.id', '=', 'posts.autorID')->where('posts.id', $id)->get();
+        // dd($query);
+
+        return $query;
     }
 
     public function postIzmena($id){
@@ -48,7 +57,7 @@ class agencijaBlog extends Model
             'tekst' => $tekst,
             'tipPosta' => $tip,
             'Status' => $statusPosta,
-            'created_at' => $kreirano,
+            'created_at' => Carbon::parse($kreirano)->addHours(2),
             'published_at' => $objavljeno,
             'archived_at' => $arhivirano,
             'urlSlika' => $url,
