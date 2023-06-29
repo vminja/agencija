@@ -50,9 +50,4 @@ class agencijaPolisa extends Model
 
     }
 
-    public function dodajOsiguranike($dataArr, $polisaID)
-    {
-        
-    }
-
 }
