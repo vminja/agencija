@@ -1,6 +1,5 @@
-import 'bootstrap-vue/dist/bootstrap-vue.css' 
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'bootstrap/dist/css/bootstrap.css'
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -24,11 +23,15 @@ window.Vue = require('vue').default;
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
 Vue.component('polisa', require('./components/Polisa.vue').default);
 
 Vue.component('polisa-prikaz', require('./components/PolisaPrikaz.vue').default);
 
 Vue.component('zaglavlje', require('./components/Zaglavlje.vue').default);
+
+Vue.component('futer', require('./components/Futer.vue').default);
 
 Vue.component('blog', require('./components/Blog.vue').default);
 
@@ -40,7 +43,6 @@ Vue.component('admin-blog-kreiraj', require('./components/AdminBlogKreiraj.vue')
 Vue.component('admin-blog-izmeni', require('./components/AdminBlogIzmeni.vue').default);
 
 Vue.component('admin-blog-prikazi', require('./components/AdminBlogPrikazi.vue').default);
-
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -54,4 +56,8 @@ const app = new Vue({
 
 const app2 = new Vue({
     el: '#app2',
+});
+
+const app3 = new Vue({
+    el: '#app3',
 });

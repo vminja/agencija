@@ -15,7 +15,7 @@
                     <ul class="dropdown-menu bg-success">
                         <li><a class="text-dark px-3" href="/adminPanel/blog/kreirajBlog">Kreiraj post</a></li>
                     </ul>
-                </div>
+                </div> 
                 <div class="btn-group dropend">
                     <a type="button" class="nav-link btn bg-success bg-gradient-500  dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         Admin panel

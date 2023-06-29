@@ -22,6 +22,10 @@
         </div>
     </div>
 
+    <div id='app3'>
+        @yield('footer')
+    </div>
+
     <script src="{{asset('/js/app.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 </body>

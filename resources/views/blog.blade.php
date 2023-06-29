@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.layoutApp')
 
 @section('header')
     <zaglavlje/>
@@ -7,3 +7,7 @@
 @section('content')
     <blog :data="{{ $data }}"/>
 @endsection
+
+@section('footer')
+    <futer/>
+@endsection 

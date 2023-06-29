@@ -12,7 +12,7 @@ class agencijaBlog extends Model
     use HasFactory;
 
     public function postovi(){
-        $data = DB::table('posts')->select('posts.id','posts.naslov', 'posts.tekst', 'posts.opis', 'posts.urlSlika', 'posts.published_at', 'autori.ime', 'autori.prezime')->leftJoin('autori', 'autori.id', '=', 'posts.autorID')->get();
+        $data = DB::table('posts')->select('posts.id','posts.naslov', 'posts.tekst', 'posts.opis', 'posts.urlSlika', 'posts.published_at', 'autori.ime', 'autori.prezime')->leftJoin('autori', 'autori.id', '=', 'posts.autorID')->where('posts.Status', 'Objavljeno')->orderByDesc('posts.published_at')->get();
         // dd($data);  DB::raw('SUBSTRING(posts.urlSlika,6,100)')
 
         return $data;
@@ -87,7 +87,7 @@ class agencijaBlog extends Model
             'tipPosta' => $tip,
             'urlSlika' => $urlSlika
         ]);
-
+ 
         // dd($data);
         // return $data;
 

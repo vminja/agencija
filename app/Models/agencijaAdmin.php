@@ -83,7 +83,7 @@ class agencijaAdmin extends Model
                     break;
                 case '6':
                     $sort = 'posts.archived_at';
-                    break;
+                    break; 
                 case '7':
                     $sort = 'posts.published_at';
                     break;

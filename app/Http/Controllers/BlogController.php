@@ -64,7 +64,7 @@ class BlogController extends Controller
         return view('izmeniBlog', ['data' => $data]);
 
         // return view("kreirajBlog");
-        
+         
       }
 
       public function napraviNoviBlog(Request $req)

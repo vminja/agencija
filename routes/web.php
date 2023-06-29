@@ -70,3 +70,6 @@ Route::post('/adminPanel/blog/napraviBlog', [BlogController::class, 'napraviNovi
 
 
 // Route::get('/adminPanel/blog', [AdminPanelController::class, 'sviBlogovi']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

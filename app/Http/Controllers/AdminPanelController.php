@@ -48,7 +48,7 @@ class AdminPanelController extends Controller
         return json_encode($data);
       }
 
-      
+       
 
       public function prikaziSveAdminBlog(){
 

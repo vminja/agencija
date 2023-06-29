@@ -59,7 +59,7 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
                     "destroy": true,
                     // data: this.data,
                     ajax: {
-                        url: '/adminPanel/blog/prikaz',
+                        url: '/adminPanel/blog/prikaz', 
                     },
                     "columnDefs": [
                         { "targets": 0, "orderable": true},
@@ -88,14 +88,22 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
                         {
                             "data" : "archived_at",
                             render: function (data){
-                                return moment(data).format("DD.MM.Y. HH:mm");
+                                if (data) {
+                                    return moment(data).format("DD.MM.Y. HH:mm");
+                                } else {
+                                    return "Nema unosa";
+                                }
                             }
                         },
                         {
                             "data" : "published_at",
                             render: function (data){
-                                return moment(data).format("DD.MM.Y. HH:mm");
-                            }
+                                if (data) {
+                                    return moment(data).format("DD.MM.Y. HH:mm");
+                                } else {
+                                    return "Nema unosa";
+                                }
+                            },
                         },
                         {
                             "data" : "urlSlika",
