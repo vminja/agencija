@@ -1,7 +1,5 @@
 <template>
     <div>
-
-        <zaglavlje></zaglavlje>
  
         <form class="border p-4 rounded" method="POST" enctype="multipart/form-data">
     
@@ -45,8 +43,8 @@
             </div>
 
             <div class="mb-3">
-                <label for="formFile" class="form-label"><b>Trenutna slika:</b></label>
-                <img type="file" class="form-control" v-for="d in data" style="width: 350px; height: auto;" :src=d.urlSlika />
+                <label><b>Trenutna slika:</b></label><br>
+                <img type="file" v-for="d in data" style="width: 350px; height: auto;" :src=d.urlSlika />
             </div>
 
 
@@ -57,7 +55,8 @@
             </div>
             
             <div class="mb-3 d-grid gap-2 col-4 mx-auto">
-                <button id="dugme" type="button" @click="izmeniPost" class="btn btn-success">Sacuvaj izmene</button>
+                <button type="button" @click="izmeniPost" class="btn btn-success">Sacuvaj izmene</button>
+                <a type="button" href="/adminPanel/blog/prikazBlog" class="btn btn-secondary">Nazad</a>
             </div>
         </form>
       
@@ -102,7 +101,6 @@ import { VueEditor } from "vue2-editor";
             dodajSliku(event) {
                 this.slika = event.target.files[0];
             },
-
             izmeniPost() {
                 if(this.naslov === '' || this.opis === '' || this.content === '' || this.tip === '' || this.slika === ''){
                     Swal.fire({
@@ -141,6 +139,10 @@ import { VueEditor } from "vue2-editor";
                 }).catch(error => {
                     // Handle any errors
                     console.error(error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Uneli ste nedozvoljen tip fajla!',
+                    });
                 });
             },
 

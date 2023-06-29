@@ -48,10 +48,10 @@ class agencijaBlog extends Model
 
     // public function 
 
-    public function dodajPost($naslov, $opis, $tekst, $tip, $statusPosta, $url, $kreirano, $objavljeno, $arhivirano, $autorID){
+    public function dodajPost($naslov, $opis, $tekst, $tip, $statusPosta,  $kreirano, $objavljeno, $arhivirano, $autorID){
         // dd($url);
 
-        $data = DB::table('posts')->insert([
+        $data = DB::table('posts')->insertGetId([
             'naslov' =>  $naslov,
             'opis' => $opis,
             'tekst' => $tekst,
@@ -60,16 +60,23 @@ class agencijaBlog extends Model
             'created_at' => Carbon::parse($kreirano)->addHours(2),
             'published_at' => $objavljeno,
             'archived_at' => $arhivirano,
-            'urlSlika' => $url,
+            // 'urlSlika' => $url,
             'autorID' => $autorID
             
         ]);
 
         // dd($data);
-        // return $data;
+        return $data;
 
     }
-
+ 
+    public function dodajUrlSlike($urlSlika, $id){
+        // dd($urlSlika, $id);
+        $data = DB::table('posts')->where('id', $id)->update([
+            'urlSlika' => $urlSlika
+        ]);
+    }
+    
     public function azurirajPost($id, $naslov, $opis, $tekst, $tip, $urlSlika){
         // dd($id, $naslov, $opis, $tekst, $tip, $urlSlika);
         // dd("z");

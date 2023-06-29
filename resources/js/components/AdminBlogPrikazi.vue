@@ -1,8 +1,6 @@
 <template>
     <div>
 
-        <zaglavlje></zaglavlje>
-
             <div class="border m-3 p-3">
 
                 <!-- <div class="col mb-3 mt-3">
@@ -19,7 +17,7 @@
 
                 <hr>
                 <div class="col mb-3 mt-3 d-flex justify-content-center">
-                    <p class="p-2" v-bind="htmlString"  v-html="decodedHtml"></p>
+                    <p class="p-2"  v-html="decodedHtml"></p>
                 </div>
                                             
                 <hr>
@@ -66,7 +64,7 @@ import { VueEditor } from "vue2-editor";
         },
         methods: {
             formatDate(date) {
-                return moment(date).format('DD.MM.YYYY HH:mm');
+                return moment(date).format('DD.MM.YYYY');
             },
         },
         mounted() {

@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-      <zaglavlje></zaglavlje>
       <div class="row">
         <div class="col-6 mt-3 mb-2" v-for="item in data">
           <h3 class="text-center">{{ item.naslov }}</h3>
@@ -24,7 +23,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> 
     </div>
   </template>
   

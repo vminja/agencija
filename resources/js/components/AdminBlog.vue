@@ -1,12 +1,11 @@
 <template>
     <div>
-      <zaglavlje></zaglavlje>
- 
+      
       <table class="table display" id="datatable">
         <thead>
           <tr>
             <th>ID</th>
-            <th>Autor</th>
+            <th>Autor</th> 
             <th>Naslov</th>
             <th>Tip</th>
             <th>Status</th>
@@ -70,7 +69,7 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
                         { "targets": 4, "orderable": false},
                         { "targets": 5, "orderable": true},
                         { "targets": 6, "orderable": true},
-                        { "targets": 7, "orderable": false},
+                        { "targets": 7, "orderable": true},
                         { "targets": 8, "orderable": false},
                         { "targets": 9, "orderable": false},
                     ],
@@ -105,21 +104,33 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
                             }
                         }, 
                         {
-                            "data" : "akcije",
-                            render: function (data, type, row) {
-                                return  '<div class="dropdown">' +
-                                            '<button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown">Akcija</button>' +
-                                            '<div class="dropdown-menu">'+
-                                                '<a  type="button" class="dropdown-item" href="/adminPanel/blog/prikaziIzabraniBlog/' + row.id + '">Pregled</a>' +
-                                                '<a  type="button" class="dropdown-item" href="/adminPanel/blog/izmeniBlog/' + row.id + '">Izmeni</a>' +
-                                                '<a  type="button" class="dropdown-item obrisi" href="#"  data-entry-id="' + row.id + '">Obrisi</a>' +
-                                                '<a  type="button" class="dropdown-item objavi" href="#" data-entry-id="' + row.id + '">Objavi</a>'+
-                                                '<a  type="button" class="dropdown-item arhiviraj" href="#" data-entry-id="' + row.id + '">Arhiviraj</a>'+
-                                            '</div>' +
+                            "data": "akcije",
+                            render: function(data, type, row) {
+                                if (row.Status === 'Objavljeno') {
+                                return '<div class="dropdown">' +
+                                    '<button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown">Akcija</button>' +
+                                    '<div class="dropdown-menu">' +
+                                    '<a type="button" class="dropdown-item" href="/adminPanel/blog/prikaziIzabraniBlog/' + row.id + '">Pregled</a>' +
+                                    '<a type="button" class="dropdown-item" href="/adminPanel/blog/izmeniBlog/' + row.id + '">Izmeni</a>' +
+                                    '<a type="button" class="dropdown-item obrisi" data-entry-id="' + row.id + '">Obrisi</a>' +
+                                    '<a type="button" class="dropdown-item arhiviraj" data-entry-id="' + row.id + '">Arhiviraj</a>' +
+                                    '</div>' +
+                                    '</div>';
+                                } 
+                                else {
+                                    return '<div class="dropdown">' +
+                                        '<button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown">Akcija</button>' +
+                                        '<div class="dropdown-menu">' +
+                                        '<a type="button" class="dropdown-item" href="/adminPanel/blog/prikaziIzabraniBlog/' + row.id + '">Pregled</a>' +
+                                        '<a type="button" class="dropdown-item" href="/adminPanel/blog/izmeniBlog/' + row.id + '">Izmeni</a>' +
+                                        '<a type="button" class="dropdown-item obrisi" data-entry-id="' + row.id + '">Obrisi</a>' +
+                                        '<a type="button" class="dropdown-item objavi" data-entry-id="' + row.id + '">Objavi</a>' +
+                                        '</div>' +
                                         '</div>';
-                                        
+                                }
                             },
                         }
+
                     ]
                     
                 });

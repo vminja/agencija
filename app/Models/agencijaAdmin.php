@@ -76,13 +76,16 @@ class agencijaAdmin extends Model
                     $sort = 'posts.naslov';
                     break;
                 case '3':
-                    $sort = 'posts.opis';
-                    break;
-                case '5':
                     $sort = 'posts.tipPosta';
                     break;
+                case '5':
+                    $sort = 'posts.created_at';
+                    break;
                 case '6':
-                    $sort = 'posts.Status';
+                    $sort = 'posts.archived_at';
+                    break;
+                case '7':
+                    $sort = 'posts.published_at';
                     break;
             }
         }
@@ -102,7 +105,7 @@ class agencijaAdmin extends Model
         $query->orderBy($sort, $sorting);
 
         if(!empty($search)){
-            $query = $query->whereRaw("(CONCAT(autori.ime, ' ', autori.prezime) LIKE '%{$search}%' OR posts.naslov LIKE '%{$search}%' OR posts.opis LIKE '%{$search}%')");
+            $query = $query->whereRaw("(CONCAT(autori.ime, ' ', autori.prezime) LIKE '%{$search}%' OR posts.naslov LIKE '%{$search}%'");
         }
     
         $filter = $query->count();

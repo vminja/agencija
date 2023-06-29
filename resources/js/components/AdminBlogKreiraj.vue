@@ -1,6 +1,5 @@
 <template>
     <div>
-        <zaglavlje></zaglavlje>
  
         <form class="border p-4 rounded" method="POST" enctype="multipart/form-data">
                     
@@ -42,7 +41,6 @@
                 <select id="inputState2" v-model="statusPosta" name="statusPosta" class="form-control">
                     <option selected>U pripremi</option>
                     <option>Objavljeno</option>
-                    <option>Arhivirano</option>
                 </select>
             </div>
 
@@ -71,6 +69,7 @@
 
             <div class="mb-3 d-grid gap-2 col-4 mx-auto">
                 <button id="dugme" type="button" class="btn btn-success" @click="dodajPost">Kreiraj post</button>
+                <a type="button" href="/blog" class="btn btn-secondary">Nazad</a>
             </div>
         </form>
       
@@ -180,9 +179,14 @@ import { VueEditor } from "vue2-editor";
                             this.statusPosta =  'U pripremi',
                             this.content = '',
                             this.slika = null
+                            
                 }).catch(error => {
                     // Handle any errors
                     console.error(error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Uneli ste nedozvoljen tip fajla!',
+                    });
                 });
             },
 

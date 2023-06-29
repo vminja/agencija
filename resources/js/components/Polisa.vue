@@ -1,7 +1,7 @@
 <template>
 
     <div class="container">
-        <zaglavlje></zaglavlje>
+    
         <div class="row justify-content-center">
 
             <h2 class="m-3">Polisa osiguranja</h2>

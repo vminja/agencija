@@ -41,10 +41,6 @@ Vue.component('admin-blog-izmeni', require('./components/AdminBlogIzmeni.vue').d
 
 Vue.component('admin-blog-prikazi', require('./components/AdminBlogPrikazi.vue').default);
 
-Vue.component('admin-panel', require('./components/AdminPanelComp.vue').default);
-
-Vue.component('menu-comp', require('./components/Menu.vue').default);
-
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -56,3 +52,6 @@ const app = new Vue({
     el: '#app',
 });
 
+const app2 = new Vue({
+    el: '#app2',
+});
