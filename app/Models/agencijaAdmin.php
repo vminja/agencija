@@ -25,7 +25,7 @@ class agencijaAdmin extends Model
 // dd($data);
         return $data;
     }
-
+    
     public function obrisiBlog($id){
         $data = DB::table('posts')->where('posts.id', $id)->delete();
         //select('polisa.id','polisa.ime', 'polisa.prezime', 'osiguranici.ime', 'osiguranici.prezime', 'osiguranici.datum_rodjenja')
@@ -34,6 +34,14 @@ class agencijaAdmin extends Model
         return $data;
     }
     
+    public function obrisiKorisnika($id){
+        $data = DB::table('users')->where('users.id', $id)->delete();
+        //select('polisa.id','polisa.ime', 'polisa.prezime', 'osiguranici.ime', 'osiguranici.prezime', 'osiguranici.datum_rodjenja')
+        // dd($data);
+
+        return $data;
+    }
+
     public function objaviBlog($id, $status, $datum){
 // dd($id,$status,$datum);
         $data = DB::table('posts')->where('posts.id', $id)->update([

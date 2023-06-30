@@ -135,5 +135,16 @@ class AdminPanelController extends Controller
         return json_encode($data);
       }
 
+      public function obrisiKorisnika(Request $req){
+        $id = $req->input('id');
+        $data = new agencijaAdmin;
+        $data = $data->obrisiKorisnika($id);  
+        // dd($data);
+        
+        return response()->json(['success' => true]);
+
+      }
+
+      
 }
  

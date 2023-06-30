@@ -80,7 +80,8 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
                                 return '<div class="dropdown">' +
                                     '<button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown">Akcija</button>' +
                                     '<div class="dropdown-menu">' +
-                                    '<a type="button" class="dropdown-item" href="#' + row.id + '">Izmeni</a>' +
+                                    '<a type="button" class="dropdown-item" href="/adminPanel/blog/izmeniKorisnika/' + row.id + '">Izmeni</a>' +
+                                    '<a type="button" class="dropdown-item obrisi" data-entry-id="' + row.id + '">Obrisi</a>' +
                                     '</div>' +
                                     '</div>';
                             },
@@ -93,119 +94,49 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
         mounted() {
             let th = this;
 
-            // $(document).on('click', '.arhiviraj', function (e) {
-            //    var entryId = $(this).data('entry-id');
+            $(document).on('click', '.obrisi', function (e) {
 
-            //     $.ajax({
-            //         url: '/adminPanel/blog/arhiviraj',
-            //         type: 'POST',
-            //         dataType: 'json',
-            //         headers: {
-            //           'X-CSRF-TOKEN': csrfToken
-            //         },
-            //        _token: csrfToken,
-            //         data: {
-            //             id: entryId,
-            //         },
-            //         success: function(response) {
-            //             if (response.success) {
-            //                 console.log('bravo');
-            //                 th.createDataTable();
-            //                 Swal.fire({
-            //                     icon: 'success',
-            //                     title: 'Uspesno ste arhivirali post!',                        
-            //                 })
-            //             }
-            //             else {
-            //                 console.log('else', response);
-            //             }
-            //         },
-            //         error: function(xhr) {
-            //             console.log(xhr.responseText);
-            //         },
-            //     });
-        
-            // });
+                Swal.fire({
+                    title: 'Da li ste sigurni?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Obrisi',
+                    cancelButtonText: 'Odustani',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var entryId = $(this).data('entry-id');
 
-            // $(document).on('click', '.objavi', function (e) {
-            //    var entryId = $(this).data('entry-id');
+                    $.ajax({
+                        url: '/adminPanel/korisnik/obrisi',
+                        type: 'POST',
+                        dataType: 'json',
+                        headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                        },
+                    _token: csrfToken,
+                        data: {
+                            id: entryId,
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                console.log('bravo');
+                                th.createDataTable();
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Uspesno ste obrisali korisnika!',
+                                });
 
-            //     $.ajax({
-            //         url: '/adminPanel/blog/objavi',
-            //         type: 'POST',
-            //         dataType: 'json',
-            //         headers: {
-            //           'X-CSRF-TOKEN': csrfToken
-            //         },
-            //        _token: csrfToken,
-            //         data: {
-            //             id: entryId,
-            //         },
-            //         success: function(response) {
-            //             if (response.success) {
-            //                 console.log('bravo');
-            //                 th.createDataTable();
-            //                 Swal.fire({
-            //                     icon: 'success',
-            //                     title: 'Uspesno ste objavili post!',
-            //                 });
-                           
-                        
-            //             }
-            //             else {
-            //                 console.log('else', response);
-            //             }
-            //         },
-            //         error: function(xhr) {
-            //             console.log(xhr.responseText);
-            //         },
-            //     });
-
-            // });
-
-            // $(document).on('click', '.obrisi', function (e) {
-
-            //     Swal.fire({
-            //         title: 'Da li ste sigurni?',
-            //         showCancelButton: true,
-            //         confirmButtonText: 'Obrisi',
-            //         cancelButtonText: 'Odustani',
-            //     }).then((result) => {
-            //         if (result.isConfirmed) {
-            //             var entryId = $(this).data('entry-id');
-
-            //         $.ajax({
-            //             url: '/adminPanel/blog/obrisi',
-            //             type: 'POST',
-            //             dataType: 'json',
-            //             headers: {
-            //             'X-CSRF-TOKEN': csrfToken
-            //             },
-            //         _token: csrfToken,
-            //             data: {
-            //                 id: entryId,
-            //             },
-            //             success: function(response) {
-            //                 if (response.success) {
-            //                     console.log('bravo');
-            //                     th.createDataTable();
-            //                     Swal.fire({
-            //                         icon: 'success',
-            //                         title: 'Uspesno ste obrisali post!',
-            //                     });
-
-            //                 }
-            //                 else {
-            //                     console.log('else', response);
-            //                 }
-            //             },
-            //             error: function(xhr) {
-            //                 console.log(xhr.responseText);
-            //             },
-            //         });
-            //         }
-            //     })
-            // });
+                            }
+                            else {
+                                console.log('else', response);
+                            }
+                        },
+                        error: function(xhr) {
+                            console.log(xhr.responseText);
+                        },
+                    });
+                    }
+                })
+            });
          
             this.createDataTable();
            

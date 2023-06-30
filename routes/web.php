@@ -79,12 +79,14 @@ Route::get('/adminPanel/korisnici/prikazi', [AdminPanelController::class, 'sviKo
 
 Route::get('/adminPanel/blog/izmeniKorisnika/{id}', [BlogController::class, 'AdminKorisnikIzmeni']);
 
+Route::post('/adminPanel/blog/sacuvajIzmenuKorisnika', [BlogController::class, 'sacuvajIzmenuKorisnika']);
 
-// Route::post('/adminPanel/blog/sacuvajIzmenuBloga', [BlogController::class, 'sacuvajIzmenuBlog']);
+Route::post('/adminPanel/korisnik/obrisi', [AdminPanelController::class, 'obrisiKorisnika']);
+
 
 });
 
 // Route::get('/adminPanel/blog', [AdminPanelController::class, 'sviBlogovi']);
 Auth::routes();
 
-Route::get('/blog', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -73,6 +73,7 @@
                                         <hr>
                                         <label class="dropdown-header text-dark p-2"><b>KORISNICI</b></label>
                                         <li><a href="/adminPanel/korisnici" class="text-dark px-3">Pregled korisnika</a></li>
+                                        <li><a href="#" class="text-dark px-3">Registracija</a></li>
                                     </ul>
                                 </div>  
                             @endif             

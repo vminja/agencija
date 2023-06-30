@@ -28,6 +28,6 @@ class HomeController extends Controller
         $data = $data->postovi();  
 
         return view('blog', ['data' => $data]);
-        // return view('blog');
+        // return view('home');
     }
 }
