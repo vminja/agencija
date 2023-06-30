@@ -6,7 +6,7 @@
           <!-- <hr>
           <p class="text-center">{{ item.opis }}</p> -->
           <div class="card">
-            <a :href="`/adminPanel/blog/prikaziIzabraniBlog/${item.id}`" type="button">
+            <a :href="`/blog/prikaziIzabraniBlog/${item.id}`" type="button">
               <img class="card-img-top" :src="item.urlSlika" alt="slika" style="width: 100%; height: 500px">
             </a>
             <div class="card-body">

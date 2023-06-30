@@ -1,4 +1,4 @@
-@extends('layouts.layoutApp')
+@extends('layouts.app')
 
 @section('header')
     <zaglavlje/>
@@ -6,4 +6,8 @@
 
 @section('content')
     <admin-blog></admin-blog>   
+@endsection
+
+@section('footer')
+    <futer/>
 @endsection

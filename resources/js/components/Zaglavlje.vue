@@ -13,7 +13,7 @@
                     <a type="button" class="nav-link btn bg-success bg-gradient-500 dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                     </a>
                     <ul class="dropdown-menu bg-success">
-                        <li><a class="text-dark px-3" href="/adminPanel/blog/kreirajBlog">Kreiraj post</a></li>
+                        <li><a class="text-dark px-3" href="/blog/kreirajBlog">Kreiraj post</a></li>
                     </ul>
                 </div> 
                 <div class="btn-group dropend">
@@ -34,6 +34,7 @@
                 </div>               
             </div>
             </div> 
+            
         </div>        
     </nav>     
 </template>

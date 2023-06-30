@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-
+ 
     <div id='app3'>
         @yield('footer')
     </div>

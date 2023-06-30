@@ -1,4 +1,4 @@
-@extends('layouts.layoutApp')
+@extends('layouts.app')
 
 @section('header')
     <zaglavlje/>
@@ -6,4 +6,8 @@
 
 @section('content')
     <polisa-prikaz></polisa-prikaz>
+@endsection
+
+@section('footer')
+    <futer/>
 @endsection

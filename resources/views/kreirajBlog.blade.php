@@ -1,4 +1,4 @@
-@extends('layouts.layoutApp')
+@extends('layouts.app')
 
 @section('header')
     <zaglavlje/>
@@ -9,3 +9,6 @@
 @endsection
 
 
+@section('footer')
+    <futer/>
+@endsection

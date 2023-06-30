@@ -20,17 +20,31 @@ use App\Http\Controllers\AdminPanelController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::middleware('auth', 'isUser')->group(function() {
+
 Route::get('/osiguranje', [PolisaOsiguranjaController::class, 'prikaz']);
 
 Route::post('/osiguranje', [PolisaOsiguranjaController::class, 'vrstaPolise']);
 
 Route::post('/osiguranje/dodajPolisu', [PolisaOsiguranjaController::class, 'dodajPolisu']);
 
-Route::get('/adminPanel', [AdminPanelController::class, 'metoda']);
-//admin dashboard 
+Route::get('/blog', [BlogController::class, 'metoda']);
+//user prikaz postova/blogova
 
+Route::get('/blog/kreirajBlog', [BlogController::class, 'AdminBlog']);
+//user kreiranje posta
 
-//
+Route::get('/blog/prikaziIzabraniBlog/{id}', [BlogController::class, 'AdminBlogPrikazi']);
+
+Route::post('/adminPanel/blog/napraviBlog', [BlogController::class, 'napraviNoviBlog']);
+
+});
+
+////
+//MIDDLEWARE
+//////
+Route::middleware('auth', 'isAdmin')->group(function() {
 
 Route::get('/adminPanel/polise', [AdminPanelController::class, 'svePolise']);
 
@@ -47,29 +61,21 @@ Route::post('/adminPanel/blog/objavi', [AdminPanelController::class, 'objaviBlog
 //objavljivanje blogova
 Route::post('/adminPanel/blog/arhiviraj', [AdminPanelController::class, 'arhivirajBlog']);
 //arhiviranje blogova
+ 
 
-
-Route::get('/blog', [BlogController::class, 'metoda']);
-//user prikaz postova/blogova
 
 Route::get('/adminPanel/blog/prikaz', [AdminPanelController::class, 'sviBlogovi']);
 
 Route::get('/adminPanel/blog/izmeniBlog/{id}', [BlogController::class, 'AdminBlogIzmeni']);
 
 
-Route::get('/adminPanel/blog/prikaziIzabraniBlog/{id}', [BlogController::class, 'AdminBlogPrikazi']);
-
-
-Route::get('/adminPanel/blog/kreirajBlog', [BlogController::class, 'AdminBlog']);
-//user kreiranje posta
-
 Route::post('/adminPanel/blog/sacuvajIzmenuBloga', [BlogController::class, 'sacuvajIzmenuBlog']);
 
-Route::post('/adminPanel/blog/napraviBlog', [BlogController::class, 'napraviNoviBlog']);
+// Route::post('/adminPanel/blog/napraviBlog', [BlogController::class, 'napraviNoviBlog']);
 
-
+});
 
 // Route::get('/adminPanel/blog', [AdminPanelController::class, 'sviBlogovi']);
 Auth::routes();
 
-Route::get('/blog', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

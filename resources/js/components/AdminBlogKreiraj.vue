@@ -182,7 +182,7 @@ import { VueEditor } from "vue2-editor";
                             
                 }).catch(error => {
                     // Handle any errors
-                    console.error(error);
+                    console.error('greska!',error);
                     Swal.fire({
                         icon: 'error',
                         title: 'Uneli ste nedozvoljen tip fajla!',
