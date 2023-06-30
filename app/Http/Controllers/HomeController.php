@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\agencijaBlog;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $data = new agencijaBlog;
+        $data = $data->postovi();  
+
+        return view('blog', ['data' => $data]);
+        // return view('blog');
     }
 }

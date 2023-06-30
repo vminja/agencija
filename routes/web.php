@@ -78,4 +78,4 @@ Route::post('/adminPanel/blog/sacuvajIzmenuBloga', [BlogController::class, 'sacu
 // Route::get('/adminPanel/blog', [AdminPanelController::class, 'sviBlogovi']);
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/blog', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

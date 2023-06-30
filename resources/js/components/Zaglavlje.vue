@@ -2,9 +2,6 @@
     <nav class="navbar navbar-expand-sm bg-success mb-3">
         <div class="container-fluid">
             <h3 class="navbar-brand">Navigacioni meni</h3>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a type="button" class="nav-link btn bg-success bg-gradient-500" href="/osiguranje">Putno osiguranje</a>
