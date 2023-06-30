@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     public function metoda(){
-
+ 
         $data = new agencijaBlog;
         $data = $data->postovi();  
 
@@ -157,4 +157,22 @@ class BlogController extends Controller
           return response()->json(['success' => true]);
       }
 
+      public function AdminKorisnikIzmeni(Request $req){
+        // dd($req);
+                // $id = $req->url();
+                $url = $req->url();
+                $parsedUrl = parse_url($url);
+                $path = $parsedUrl['path'];
+                $id = basename($path);
+                // dd($id);
+                $data = new agencijaBlog;
+                $data = $data->postIzmena($id);  
+        
+                // dd($data);
+        
+                return view('izmeniKorisnika', ['data' => $data]);
+        
+                // return view("kreirajBlog");
+                 
+              }
 }

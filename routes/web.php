@@ -41,9 +41,9 @@ Route::post('/adminPanel/blog/napraviBlog', [BlogController::class, 'napraviNovi
 
 });
 
-////
+//// 
 //MIDDLEWARE
-//////
+////// 
 Route::middleware('auth', 'isAdmin')->group(function() {
 
 Route::get('/adminPanel/polise', [AdminPanelController::class, 'svePolise']);
@@ -73,7 +73,14 @@ Route::post('/adminPanel/blog/sacuvajIzmenuBloga', [BlogController::class, 'sacu
 
 // Route::post('/adminPanel/blog/napraviBlog', [BlogController::class, 'napraviNoviBlog']);
 
-Route::get('/adminPanel/korisnici', [AdminPanelController::class, 'sviKorisnici']);
+Route::get('/adminPanel/korisnici', [AdminPanelController::class, 'prikazKorisnika']);
+
+Route::get('/adminPanel/korisnici/prikazi', [AdminPanelController::class, 'sviKorisnici']);
+
+Route::get('/adminPanel/blog/izmeniKorisnika/{id}', [BlogController::class, 'AdminKorisnikIzmeni']);
+
+
+// Route::post('/adminPanel/blog/sacuvajIzmenuBloga', [BlogController::class, 'sacuvajIzmenuBlog']);
 
 });
 

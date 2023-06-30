@@ -99,7 +99,7 @@ class AdminPanelController extends Controller
           $data = $data->arhivirajBlog($id, $statusPosta, $todayDate);  
   
         return response()->json(['success' => true]);
-
+ 
       }
       
       public function svePolise(Request $request){
@@ -114,6 +114,12 @@ class AdminPanelController extends Controller
         // dd($data);
         return json_encode($data);
 
+      }
+
+      public function prikazKorisnika(){
+    
+        return view('prikaziKorisnike');
+    
       }
 
       public function sviKorisnici(Request $request) {

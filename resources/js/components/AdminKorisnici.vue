@@ -1,15 +1,14 @@
 <template>
-    <div>
-      
+    <div class="m-3">
       <table class="table display" id="datatable">
         <thead>
           <tr>
             <th>ID</th>
             <th>Ime</th> 
             <th>Email</th>
-            <th>Password</th>
             <th>Tip</th>
             <th>Datum kreiranja</th>
+            <th>Akcija</th>
           </tr>
         </thead>
         <tbody>
@@ -17,8 +16,7 @@
         </tbody>
       </table>
 
-      
-    </div>
+    </div> 
 </template>
 
 <script>
@@ -55,21 +53,20 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
                     "destroy": true,
                     // data: this.data,
                     ajax: {
-                        url: '/adminPanel/korisnici', 
+                        url: '/adminPanel/korisnici/prikazi', 
                     },
                     "columnDefs": [
                         { "targets": 0, "orderable": true},
                         { "targets": 1, "orderable": true},
                         { "targets": 2, "orderable": true},
-                        {"targets": 3, "orderable": false},
-                        { "targets": 4, "orderable": true},
+                        { "targets": 3, "orderable": true},
+                        { "targets": 4, "orderable": false},
                         { "targets": 5, "orderable": false},
                     ],
                     "columns": [
                         {"data" : "id" },
                         {"data" : "name" },
                         {"data" : "email"},
-                        {"data" : "password"},
                         {"data" : "user_type"},
                         {
                             "data" : "created_at",
@@ -77,6 +74,17 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
                                 return moment(data).format("DD.MM.Y. HH:mm");
                             }
                         },
+                        {
+                            "data": "akcije",
+                            render: function(data, type, row) {
+                                return '<div class="dropdown">' +
+                                    '<button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown">Akcija</button>' +
+                                    '<div class="dropdown-menu">' +
+                                    '<a type="button" class="dropdown-item" href="#' + row.id + '">Izmeni</a>' +
+                                    '</div>' +
+                                    '</div>';
+                            },
+                        }
                     ]
                     
                 });

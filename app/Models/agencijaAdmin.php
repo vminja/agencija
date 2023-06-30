@@ -191,7 +191,7 @@ class agencijaAdmin extends Model
                 case '2':
                     $sort = 'email';
                     break;
-                case '4':
+                case '3':
                     $sort = 'user_type';
                     break;
             }

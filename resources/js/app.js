@@ -45,6 +45,8 @@ Vue.component('admin-blog-prikazi', require('./components/AdminBlogPrikazi.vue')
 
 Vue.component('admin-korisnici', require('./components/AdminKorisnici.vue').default);
 
+Vue.component('admin-korisnik-izmeni', require('./components/AdminKorisnikIzmeni.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
