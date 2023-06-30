@@ -1,7 +1,7 @@
 <template>
     <div>
  
-        <form class="border p-4 rounded" method="POST" enctype="multipart/form-data">
+        <form class="border p-4 rounded m-4" method="POST" enctype="multipart/form-data">
     
             <!-- <select disabled id="inputState" name="id" class="form-control" v-model="id">
                 <option v-for="item in data" :value="item.id">{{ item.id }}</option>

@@ -116,5 +116,18 @@ class AdminPanelController extends Controller
 
       }
 
+      public function sviKorisnici(Request $request) {
+        // za prikaz svih blogova
+        $tabela = new agencijaAdmin;
+        $sqlData = $tabela->korisniciDataTable($request);
+        // dd($sqlData);
+        $data['draw'] = $request->input('draw');
+        $data['recordsFiltered'] = $sqlData['filter'];  
+        $data['recordsTotal'] = count($sqlData['data']); 
+        $data['data'] = $sqlData['data'];
+        // dd($data);
+        return json_encode($data);
+      }
+
 }
  

@@ -171,4 +171,54 @@ class agencijaAdmin extends Model
         ];
     
     }
+
+    public function korisniciDataTable($request){
+        // dd($request);
+        $start = isset($request['start']) ? $request['start'] : 0;
+        $length = isset($request['length']) ? $request['length'] : 0;
+        $sort = 'users.id';
+        $sorting = 'asc';
+        $search = isset($request['search']['value']) ? $request['search']['value'] : 0;
+        
+        if (isset($request['order'][0]['column'])) {
+            switch ($request['order'][0]['column']) {
+                case '0':
+                    $sort = 'id';
+                    break;
+                case '1':
+                    $sort = 'name';
+                    break;
+                case '2':
+                    $sort = 'email';
+                    break;
+                case '4':
+                    $sort = 'user_type';
+                    break;
+            }
+        }
+    
+        if (isset($request['order'][0]['dir'])) {
+            $sorting = $request['order'][0]['dir'];
+        }
+    
+        $query = DB::table('users')->select('*');
+        $query->orderBy($sort, $sorting);
+
+        if(!empty($search)){
+            $query = $query->whereRaw("(name LIKE '%{$search}%' OR email LIKE '%{$search}%' OR created_at LIKE '%{$search}%'");
+        }
+    
+        $filter = $query->count();
+
+        $result = $query->offset($start)->limit($length)->get();
+
+        //data bi trebalo posebno da se vrati??
+        // return $result;
+    
+        return [
+            'filter' => $filter,
+            'data' => $result,
+        ];
+    
+    }
 }

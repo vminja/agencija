@@ -43,7 +43,7 @@ Vue.component('admin-blog-izmeni', require('./components/AdminBlogIzmeni.vue').d
 
 Vue.component('admin-blog-prikazi', require('./components/AdminBlogPrikazi.vue').default);
 
-
+Vue.component('admin-korisnici', require('./components/AdminKorisnici.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

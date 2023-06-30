@@ -39,11 +39,11 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
+                            <!-- @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif
+                            @endif -->
                         </ul>
                         @else
                             <ul class="navbar-nav">
@@ -72,7 +72,7 @@
                                         <!-- <li><a href="/adminPanel/blog/kreirajBlog" class="text-dark px-3">Kreiraj post</a></li> -->
                                         <hr>
                                         <label class="dropdown-header text-dark p-2"><b>KORISNICI</b></label>
-                                        <li><a href="#" class="text-dark px-3">Pregled korisnika</a></li>
+                                        <li><a href="/adminPanel/korisnici" class="text-dark px-3">Pregled korisnika</a></li>
                                     </ul>
                                 </div>  
                             @endif             

@@ -73,6 +73,8 @@ Route::post('/adminPanel/blog/sacuvajIzmenuBloga', [BlogController::class, 'sacu
 
 // Route::post('/adminPanel/blog/napraviBlog', [BlogController::class, 'napraviNoviBlog']);
 
+Route::get('/adminPanel/korisnici', [AdminPanelController::class, 'sviKorisnici']);
+
 });
 
 // Route::get('/adminPanel/blog', [AdminPanelController::class, 'sviBlogovi']);

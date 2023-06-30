@@ -1,7 +1,7 @@
 <template>
     <div>
  
-        <form class="border p-4 rounded" method="POST" enctype="multipart/form-data">
+        <form class="border p-4 rounded m-4" method="POST" enctype="multipart/form-data">
                     
             <!-- <div class="col mb-3 mt-3">
                 <label for="inputState">ID posta</label>
