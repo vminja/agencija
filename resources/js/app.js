@@ -61,6 +61,6 @@ const app2 = new Vue({
     el: '#app2',
 });
 
-const app3 = new Vue({
-    el: '#app3',
-});
+// const app3 = new Vue({
+//     el: '#app3',
+// });

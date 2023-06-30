@@ -111,9 +111,9 @@
     </main>
 
 
-    <div id="app3">
+    <!-- <div id="app3">
         @yield('footer')
-    </div>
+    </div> -->
    
 </body>
 </html>
