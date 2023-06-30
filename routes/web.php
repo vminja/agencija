@@ -83,6 +83,7 @@ Route::post('/adminPanel/blog/sacuvajIzmenuKorisnika', [BlogController::class, '
 
 Route::post('/adminPanel/korisnik/obrisi', [AdminPanelController::class, 'obrisiKorisnika']);
 
+Route::get('/adminPanel/korisnici/registracija', [AdminPanelController::class, 'registrujKorisnika']);
 
 });
 

@@ -47,6 +47,8 @@ Vue.component('admin-korisnici', require('./components/AdminKorisnici.vue').defa
 
 Vue.component('admin-korisnik-izmeni', require('./components/AdminKorisnikIzmeni.vue').default);
 
+Vue.component('admin-korisnik-registracija', require('./components/AdminKorisnikRegistracija.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

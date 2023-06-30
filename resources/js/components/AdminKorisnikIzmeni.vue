@@ -13,7 +13,7 @@
             </div>
                                         
             <div class="form-group mb-3">
-                <label for="inputState">Tip posta</label>
+                <label for="inputState">Tip korisnika</label>
                 <select id="inputState"  name="tip" class="form-control" v-model="tip" >
                     <option selected>user</option>
                     <option>admin</option>

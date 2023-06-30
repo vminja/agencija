@@ -145,6 +145,11 @@ class AdminPanelController extends Controller
 
       }
 
+      public function registrujKorisnika(){
+
+        return view("registrujKorisnika");
+        
+      }
       
-}
+} 
  
