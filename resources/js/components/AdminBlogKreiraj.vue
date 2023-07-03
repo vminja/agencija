@@ -2,15 +2,11 @@
     <div>
  
         <form class="border p-4 rounded m-4" method="POST" enctype="multipart/form-data">
-                    
-            <!-- <div class="col mb-3 mt-3">
-                <label for="inputState">ID posta</label>
-                <input disabled type="text" class="form-control" name="idPosta">
-            </div> -->
 
             <div class="col mb-3 mt-3">
                 <label for="inputState">Naslov</label>
-                <input required type="text" class="form-control" name="naslov" placeholder="Unesite naslov posta" v-model="naslov">
+                <input required type="text" class="form-control" name="naslov" :class="{ 'is-invalid': greske.naslov }" placeholder="Unesite naslov posta" v-model="naslov">
+                <span v-if="greske.naslov" class="invalid-feedback">Molimo Vas unesite naslov.</span>
             </div>
         
             <div class="col mb-3 mt-3">
@@ -20,7 +16,8 @@
             
             <div class="col mb-3 mt-3">
                 <label for="inputState">Tekst</label> 
-                <vue-editor name="tekst" v-model="content" />
+                <vue-editor name="tekst" v-model="content" :class="{ 'is-invalid': greske.content }" />
+                <span v-if="greske.content" class="invalid-feedback">Molimo Vas unesite tekst.</span>
             </div>
                                         
 
@@ -49,21 +46,18 @@
                 <input v-on:change="dodajSliku" class="form-control" name="slika" type="file" id="formFile" >
             </div>
 
-
-            
-
             <div class="form-group mb-3">
                 <label for="autor">Autor</label>
-                <select id="autor" v-model="autor" name="autor" class="form-control">
+                <select id="autor" v-model="autor" name="autor" class="form-control" :class="{ 'is-invalid': greske.autor }">
                     <option v-for="item in data" :value="item.id">{{ item.ime }} {{ item.prezime }} - {{ item.id }}</option>
                 </select>
+                <span v-if="greske.autor" class="invalid-feedback">Molimo Vas odaberite autora.</span>
             </div>
         
             <div class="mb-3">
                 <label class="p-1" for="inputState">Datum kreiranja posta</label> <br>
                 <!-- <input disabled type="date" class="form-control" v-model="datumKreiranja"> -->
                 <date-picker disabled v-model="datumKreiranja" type="date" :format="dateFormat"></date-picker>
-
             </div>
             
 
@@ -105,6 +99,7 @@ import { VueEditor } from "vue2-editor";
                 datumKreiranja: new Date(),
                 content:'',
                 slika: null,
+                greske: {}
                 // data: [],
             }
         },
@@ -147,13 +142,31 @@ import { VueEditor } from "vue2-editor";
             // },
             
             dodajPost() {
-                if(this.naslov === '' || this.opis === '' || this.datumKreiranja === '' || this.content === '' || this.tip === '' || this.slika === '' || this.autor === '' || this.statusPosta === ''){
+                if(this.naslov === '' || this.datumKreiranja === '' || this.content === '' || this.tip === '' || this.autor === '' || this.statusPosta === ''){
+                    
+                    this.greske = {
+                        naslov: this.naslov === '',
+                        content: this.content === '',
+                        autor: this.autor === '',
+                
+                    };
                     Swal.fire({
                         icon: 'warning',
                         title: 'Molimo Vas da popunite sva polja.',
-                    })
+                    }) 
                     return; 
                 }
+
+                if(this.slika === null){
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Izaberite sliku!',
+                    }) 
+                    return; 
+                }
+
+                this.greske = {};
+
                 const postData = new FormData();
                 postData.append('autor', this.autor);
                 postData.append('naslov', this.naslov);

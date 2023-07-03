@@ -14,7 +14,9 @@
            
             <div class="col mb-3 mt-3">
                 <label for="inputState">Naslov</label>
-                <input required type="text" class="form-control" name="naslov" placeholder="Unesite naslov posta" v-model="naslov" >
+                <input required type="text" class="form-control" name="naslov" :class="{ 'is-invalid': greske.naslov }" placeholder="Unesite naslov posta" v-model="naslov" >
+                <span v-if="greske.naslov" class="invalid-feedback">Molimo Vas unesite naslov.</span>
+
             </div>
 
             <div class="col mb-3 mt-3">
@@ -24,7 +26,9 @@
             
             <div class="col mb-3 mt-3">
                 <label for="inputState">Tekst</label> 
-                <vue-editor name="tekst" v-model="content" />
+                <vue-editor name="tekst" v-model="content" :class="{ 'is-invalid': greske.content }"/>
+                <span v-if="greske.content" class="invalid-feedback">Molimo Vas unesite tekst.</span>
+
             </div>
                                         
 
@@ -37,23 +41,33 @@
             </div>
 
 
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="formFile" class="form-label">Promeni sliku</label>
-                <input v-on:change="dodajSliku" class="form-control" name="slika" type="file" id="formFile" >
+                <input v-on:change="dodajSliku" class="form-control" name="slika" type="file" id="formFile" :value="slika">
             </div>
 
             <div class="mb-3">
                 <label><b>Trenutna slika:</b></label><br>
                 <img type="file" v-for="d in data" style="width: 350px; height: auto;" :src=d.urlSlika />
+            </div> -->
+
+            <div class="mb-3">
+                <label for="formFile" class="form-label"><b>Ukoliko zelite da promenite sliku, izaberite novu sliku ovde:</b></label>
+                <input v-on:change="dodajSliku" class="form-control" name="slika" type="file" id="formFile">
             </div>
 
+                <div class="mb-3">
+                <label><b>Trenutna slika:</b> {{ slika }} </label><br>
+                <img type="file" v-for="d in data" style="width: 350px; height: auto;" :src=d.urlSlika />
+            </div>
 
-
+            
             <div class="col mb-3 mt-3">
                 <label for="inputState">Autor posta: </label>
                 <label v-for="d in data">{{ d.kolona }}</label>
             </div>
             
+
             <div class="mb-3 d-grid gap-2 col-4 mx-auto">
                 <button type="button" @click="izmeniPost" class="btn btn-success">Sacuvaj izmene</button>
                 <a type="button" href="/adminPanel/blog/prikazBlog" class="btn btn-secondary">Nazad</a>
@@ -86,9 +100,10 @@ import { VueEditor } from "vue2-editor";
                 opis: this.data[0].opis,
                 content: this.data[0].tekst,
                 tip: this.data[0].tipPosta,
-                slika: '',
+                slika:  this.data.length > 0 ? this.data[0].urlSlika : '',
                 autor: '',
                 id: this.data.length > 0 ? this.data[0].id : null,
+                greske: {},
             }
         },
         methods: {
@@ -102,13 +117,21 @@ import { VueEditor } from "vue2-editor";
                 this.slika = event.target.files[0];
             },
             izmeniPost() {
-                if(this.naslov === '' || this.opis === '' || this.content === '' || this.tip === '' || this.slika === ''){
+                if(this.naslov === '' || this.content === '' || this.tip === ''){
+                    this.greske = {
+                        naslov: this.naslov === '',
+                        content: this.content === '',
+                
+                };
                     Swal.fire({
                         icon: 'warning',
                         title: 'Molimo Vas da popunite sva polja.',
                     })
                     return;
                 }
+
+                this.greske = {};
+
                 const postData = new FormData();
                 postData.append('naslov', this.naslov);
                 postData.append('opis', this.opis);

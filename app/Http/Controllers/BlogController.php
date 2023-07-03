@@ -131,12 +131,14 @@ class BlogController extends Controller
           // $tekst = Str::of($tekst)->stripTags();
           $tip = $req->input('tip');
 
-          $urlSlika = null; 
-          
-          $req->validate([
-            'slika' => 'required|image|mimes:jpg,jpeg,png,svg,webp'
-          ]);
-
+          // $urlSlika = null; 
+          // dd($req);
+          if ($req->hasFile('slika')) {
+              $req->validate([
+                'slika' => 'required|image|mimes:jpg,jpeg,png,svg,webp'
+            ]);
+          }
+ 
           // dd($req->all());
           if ($req->hasFile('slika')) {
               $file = $req->file('slika');
@@ -148,6 +150,9 @@ class BlogController extends Controller
               // $file->save();
 
               // dd($urlSlika);
+          }
+          else {
+            $urlSlika = $req->input('slika');
           }
 
           $agencijaBlog = new AgencijaBlog;
