@@ -57,7 +57,7 @@
             </div>
 
                 <div class="mb-3">
-                <label><b>Trenutna slika:</b> {{ slika }} </label><br>
+                <label v-for="d in data" ><b>Trenutna slika:</b> {{ d.urlSlika }} </label><br>
                 <img type="file" v-for="d in data" style="width: 350px; height: auto;" :src=d.urlSlika />
             </div>
 
