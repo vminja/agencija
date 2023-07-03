@@ -44,6 +44,7 @@
             <div class="mb-3">
                 <label for="formFile" class="form-label">Dodaj sliku</label>
                 <input v-on:change="dodajSliku" class="form-control" name="slika" type="file" id="formFile" >
+                <span v-if="!slikaSelected" class="text-danger">Molimo Vas izaberite sliku.</span>
             </div>
 
             <div class="form-group mb-3">
@@ -99,6 +100,7 @@ import { VueEditor } from "vue2-editor";
                 datumKreiranja: new Date(),
                 content:'',
                 slika: null,
+                slikaSelected: true,
                 greske: {}
                 // data: [],
             }
@@ -114,36 +116,11 @@ import { VueEditor } from "vue2-editor";
                 this.slika = event.target.files[0];
                 // return this.slika;
             },
-            // dodajPost() {
 
-            //     const postData = {
-            //         naslov: this.naslov,
-            //         opis: this.opis,
-            //         content: this.content,
-            //         tip: this.tip,
-            //         statusPosta: this.statusPosta,
-            //         // slika: URL.createObjectURL(this.slika) ,
-            //         slika: this.slika,
-            //         datumKreiranja: this.datumKreiranja,
-            //     };
-
-            //     axios.post('/adminPanel/blog/napraviBlog', postData, {
-            //             headers: {
-            //             'X-CSRF-TOKEN': csrfToken,
-            //             // 'Content-Type': 'multipart/form-data',
-            //         }
-            //     }).then(response => {
-            //             console.log(response.data);
-
-            //         }).catch(error => {
-            //             // Handle any errors
-            //             console.error(error);
-            //         });
-            // },
-            
             dodajPost() {
+                this.slikaSelected = true;
                 if(this.naslov === '' || this.datumKreiranja === '' || this.content === '' || this.tip === '' || this.autor === '' || this.statusPosta === ''){
-                    
+                   
                     this.greske = {
                         naslov: this.naslov === '',
                         content: this.content === '',
@@ -158,13 +135,14 @@ import { VueEditor } from "vue2-editor";
                 }
 
                 if(this.slika === null){
+                    this.slikaSelected = false;
                     Swal.fire({
                         icon: 'warning',
                         title: 'Izaberite sliku!',
                     }) 
                     return; 
                 }
-
+                
                 this.greske = {};
 
                 const postData = new FormData();
