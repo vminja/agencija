@@ -33,6 +33,29 @@ class agencijaAdmin extends Model
 
         return $data;
     }
+
+    public function korisnikIzmena($id){
+
+        $query =  DB::table('users')->select('id', 'name', 'user_type')->where('id', $id)->get();
+        // dd($query);
+
+        return $query;
+    }
+
+    public function azurirajKorisnika($id, $ime, $tip, $datum){
+        // dd($id, $ime, $tip);
+        // dd($id, $naslov, $opis, $tekst, $tip, $urlSlika);
+        // dd("z");
+        $data = DB::table('users')->where('id',$id)->update([
+            'name' =>  $ime,
+            'user_type' => $tip,
+            'updated_at' => Carbon::parse($datum)->addHours(2),
+        ]);
+ 
+        // dd($data); 
+        // return $data;
+
+    }
     
     public function obrisiKorisnika($id){
         $data = DB::table('users')->where('users.id', $id)->delete();
@@ -56,14 +79,15 @@ class agencijaAdmin extends Model
 
     public function arhivirajBlog($id, $status, $datum){
         // dd($id,$status,$datum);
-                $data = DB::table('posts')->where('posts.id', $id)->update([
-                    'Status' =>  $status,
-                    'archived_at' => Carbon::parse($datum)->addHours(2)
-                ]);
-        
-                return $data;
-            }
+        $data = DB::table('posts')->where('posts.id', $id)->update([
+            'Status' =>  $status,
+            'archived_at' => Carbon::parse($datum)->addHours(2)
+        ]);
 
+        return $data;
+    }
+
+            
     public function blogoviDataTable($request){
         // dd($request);
         $start = isset($request['start']) ? $request['start'] : 0;
@@ -113,7 +137,8 @@ class agencijaAdmin extends Model
         $query->orderBy($sort, $sorting);
 
         if(!empty($search)){
-            $query = $query->whereRaw("(CONCAT(autori.ime, ' ', autori.prezime) LIKE '%{$search}%' OR posts.naslov LIKE '%{$search}%'");
+            $query = $query->whereRaw("(CONCAT(autori.ime, ' ', autori.prezime) LIKE '%{$search}%' OR posts.naslov LIKE '%{$search}%')");
+
         }
     
         $filter = $query->count();
@@ -213,7 +238,7 @@ class agencijaAdmin extends Model
         $query->orderBy($sort, $sorting);
 
         if(!empty($search)){
-            $query = $query->whereRaw("(name LIKE '%{$search}%' OR email LIKE '%{$search}%' OR created_at LIKE '%{$search}%'");
+            $query = $query->whereRaw("(name LIKE '%{$search}%' OR email LIKE '%{$search}%' OR created_at LIKE '%{$search}%')");
         }
     
         $filter = $query->count();

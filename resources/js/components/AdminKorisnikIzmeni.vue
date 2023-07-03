@@ -4,7 +4,7 @@
         <form class="border p-4 rounded m-4" method="POST">
 
             <div class="col mb-3 mt-3">
-                <label for="inputState" v-for="d in data">ID posta: {{ d.id }} </label>
+                <label for="inputState" v-for="d in data">ID korisnika: {{ d.id }} </label>
             </div>
            
             <div class="col mb-3 mt-3">
@@ -51,6 +51,7 @@ import { VueEditor } from "vue2-editor";
                 ime: this.data[0].name,
                 tip: this.data[0].user_type,
                 id: this.data.length > 0 ? this.data[0].id : null,
+                datum: new Date(),
             }
         },
         methods: {
@@ -72,7 +73,8 @@ import { VueEditor } from "vue2-editor";
                 axios.post('/adminPanel/blog/sacuvajIzmenuKorisnika', korisnikData, {
                     params: {
                         // id: this.data[0]
-                        id: this.id
+                        id: this.id,
+                        datum: this.datum
                     },
                     headers: {
                     'X-CSRF-TOKEN': csrfToken,

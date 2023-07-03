@@ -78,7 +78,7 @@ import { VueEditor } from "vue2-editor";
     export default {
         components: { VueEditor },
         props: {
-            data:  Array,
+            data:  Array, 
         },
         data(){
             return {
@@ -134,7 +134,7 @@ import { VueEditor } from "vue2-editor";
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     this.reloadPage();
-                                }
+                                } 
                             })
                 }).catch(error => {
                     // Handle any errors
@@ -144,7 +144,7 @@ import { VueEditor } from "vue2-editor";
                         title: 'Uneli ste nedozvoljen tip fajla!',
                     });
                 });
-            },
+            }, 
 
         },
         mounted() {

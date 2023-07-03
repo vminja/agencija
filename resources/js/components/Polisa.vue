@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
 
             <h2 class="m-3">Polisa osiguranja</h2>
-            <form class="border p-4 rounded" method="GET">
+                <form class="border p-4 rounded" method="GET">
                     <div class="row">
                         <div class="col mb-3 mt-3">
                         <label for="inputState">Ime</label>
@@ -54,7 +54,7 @@
                     </div>  
 
                     <label class="col mb-3 mt-3" v-if="ukupnoDani()>=0">Izabrali ste da na putovanju provedete {{ ukupnoDani() }} dana </label>
-                    <label class="col mb-3 mt-3 text-danger" v-else><b>Nepravilan izbor datuma</b></label>
+                    <label class="col mb-3 mt-3 text-danger" v-if="izborDatuma"><b>Nepravilan izbor datuma</b></label>
 
                     <div class="row">
                         <div class="card mb-3 mt-3" v-if="selectedOption === 'grupno'" style="width: 18rem;">
@@ -121,26 +121,31 @@ export default {
             time1: '',
             time2: '',
             dateFormat : 'DD.MM.YYYY',
+            izborDatuma: false
         }
     },
     methods:{
         ukupnoDani(){
-            let ukupno = "";
+            let ukupno = '';
             let datumOd = moment(this.time1);
             let datumDo = moment(this.time2);
 
             if(datumDo >= datumOd){
             let razlika = datumDo.diff(datumOd);
             razlika = moment.duration(razlika);
-
-            return ukupno += razlika.days();
+            this.izborDatuma = false;
+            return ukupno += razlika.days()+1;
             }
             else if(this.time1 != '' && this.time2 != '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Datum povratka ne moze biti manji od datuma putovanja!',
+                })
                 this.time2 = '';
-                alert("Datum povratka ne moze biti manji od datuma putovanja!");
-                return ukupno = "";
+                this.izborDatuma = true;
+                // alert("Datum povratka ne moze biti manji od datuma putovanja!");
+                return ukupno = '';
             }
-
         },
         kreirajOsiguranika(){
 

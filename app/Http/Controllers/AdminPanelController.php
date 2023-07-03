@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class AdminPanelController extends Controller
 {
   public function prikazPolisa(){
-    
+     
     return view('osiguranjeAdminPrikaz');
 
   }
@@ -135,6 +135,39 @@ class AdminPanelController extends Controller
         return json_encode($data);
       }
 
+      public function AdminKorisnikIzmeni(Request $req){
+        // dd($req);
+        $url = $req->url();
+        $parsedUrl = parse_url($url);
+        $path = $parsedUrl['path'];
+        $id = basename($path);
+
+        $query = new agencijaAdmin;
+        $data = $query->korisnikIzmena($id);  
+
+        // dd($data);
+
+        return view('izmeniKorisnika', ['data' => $data]);
+
+        // return view("kreirajBlog");
+          
+      }
+
+      public function sacuvajIzmenuKorisnika(Request $req)
+      {  
+          
+        $id = $req->query('id');
+        $datum = $req->query('datum');
+        $ime = $req->input('ime');
+        $tip = $req->input('tip');
+// dd($id);
+        $agencijaBlog = new agencijaAdmin;
+        $agencijaBlog->azurirajKorisnika($id, $ime, $tip, $datum);
+
+        // return redirect('/blog');
+        return response()->json(['success' => true]);
+      }
+
       public function obrisiKorisnika(Request $req){
         $id = $req->input('id');
         $data = new agencijaAdmin;
@@ -150,6 +183,7 @@ class AdminPanelController extends Controller
         return view("registrujKorisnika");
         
       }
+
       
 } 
  

@@ -32,7 +32,7 @@ class agencijaBlog extends Model
         // dd($query);
 
         return $query;
-    }
+    } 
 
     public function autori(){
         $data = DB::table('autori')->select('*')->get();
@@ -87,31 +87,11 @@ class agencijaBlog extends Model
             'tipPosta' => $tip,
             'urlSlika' => $urlSlika
         ]);
- 
+  
         // dd($data);
         // return $data;
 
     }
 
-    public function korisnikIzmena($id){
-
-        $query =  DB::table('users')->select('id', 'name', 'user_type')->where('id', $id)->get();
-        // dd($query);
-
-        return $query;
-    }
-
-    public function azurirajKorisnika($id, $ime, $tip){
-        // dd($id, $ime, $tip);
-        // dd($id, $naslov, $opis, $tekst, $tip, $urlSlika);
-        // dd("z");
-        $data = DB::table('users')->where('id',$id)->update([
-            'name' =>  $ime,
-            'user_type' => $tip,
-        ]);
- 
-        // dd($data);
-        // return $data;
-
-    }
+    
 }

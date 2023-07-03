@@ -63,7 +63,7 @@ Route::post('/adminPanel/blog/arhiviraj', [AdminPanelController::class, 'arhivir
 //arhiviranje blogova
  
 
-
+ 
 Route::get('/adminPanel/blog/prikaz', [AdminPanelController::class, 'sviBlogovi']);
 
 Route::get('/adminPanel/blog/izmeniBlog/{id}', [BlogController::class, 'AdminBlogIzmeni']);
@@ -77,13 +77,15 @@ Route::get('/adminPanel/korisnici', [AdminPanelController::class, 'prikazKorisni
 
 Route::get('/adminPanel/korisnici/prikazi', [AdminPanelController::class, 'sviKorisnici']);
 
-Route::get('/adminPanel/blog/izmeniKorisnika/{id}', [BlogController::class, 'AdminKorisnikIzmeni']);
+Route::get('/adminPanel/blog/izmeniKorisnika/{id}', [AdminPanelController::class, 'AdminKorisnikIzmeni']);
 
-Route::post('/adminPanel/blog/sacuvajIzmenuKorisnika', [BlogController::class, 'sacuvajIzmenuKorisnika']);
+Route::post('/adminPanel/blog/sacuvajIzmenuKorisnika', [AdminPanelController::class, 'sacuvajIzmenuKorisnika']);
 
 Route::post('/adminPanel/korisnik/obrisi', [AdminPanelController::class, 'obrisiKorisnika']);
 
 Route::get('/adminPanel/korisnici/registracija', [AdminPanelController::class, 'registrujKorisnika']);
+
+// Route::post('/adminPanel/korisnici/registracijaSacuvaj', [AdminPanelController::class, 'sacuvajKorisnika']);
 
 });
 

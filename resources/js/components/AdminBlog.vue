@@ -1,26 +1,25 @@
 <template>
-    <div class="m-3">
-      
-      <table class="table display" id="datatable">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Autor</th> 
-            <th>Naslov</th>
-            <th>Tip</th>
-            <th>Status</th>
-            <th>Datum kreiranja</th>
-            <th>Datum arhiviranja</th>
-            <th>Datum objavljivanja</th>
-            <th>Cover</th>
-            <th>Akcija</th>
-          </tr>
-        </thead>
-        <tbody>
-          
-        </tbody>
-      </table>
-
+    <div class="m-3" >
+        
+        <table class="table display" id="datatable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Autor</th> 
+                <th>Naslov</th>
+                <th>Tip</th>
+                <th>Status</th>
+                <th>Datum kreiranja</th>
+                <th>Datum arhiviranja</th>
+                <th>Datum objavljivanja</th>
+                <th>Cover</th>
+                <th>Akcija</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+            </tbody>
+        </table>
       
     </div>
 </template>

@@ -76,7 +76,7 @@ import { VueEditor } from "vue2-editor";
                 return moment(date).format('DD.MM.YYYY HH:mm');
             },
             registruj() {
-                if(this.ime === '' || this.email === '' || this.datumKreiranja === '' || this.tip === ''){
+                if(this.ime === '' || this.email === '' || this.password === '' || this.datumKreiranja === '' || this.tip === ''){
                     Swal.fire({
                         icon: 'warning',
                         title: 'Molimo Vas da popunite sva polja.',
@@ -84,117 +84,34 @@ import { VueEditor } from "vue2-editor";
                     return;
                 }
                 const postData = new FormData();
-                postData.append('autor', this.autor);
-                postData.append('naslov', this.naslov);
-                postData.append('opis', this.opis);
-                postData.append('content', this.content);
+                postData.append('ime', this.ime);
+                postData.append('email', this.email);
+                postData.append('password', this.password);
                 postData.append('tip', this.tip);
-                postData.append('statusPosta', this.statusPosta);
-                postData.append('slika', this.slika);
                 postData.append('datumKreiranja', this.datumKreiranja);
 
-                axios.post('/adminPanel/blog/napraviBlog', postData, {
+                axios.post('/adminPanel/korisnici/registracijaSacuvaj', postData, {
                     headers: {
                     'X-CSRF-TOKEN': csrfToken,
-                    'Content-Type': 'multipart/form-data',
                     },
                 }).then(response => {
                     console.log(response.data);
                     Swal.fire({
                                 icon: 'success',
-                                title: 'Uspesno ste napravili post!',
+                                title: 'Uspesno ste napravili korisnika!',
                             });
-                            this.autor = '',
-                            this.naslov = '',
-                            this.opis = '',
-                            this.tip = 'Post',
-                            this.statusPosta =  'U pripremi',
-                            this.content = '',
-                            this.slika = null
+
+                            this.ime ='',
+                            this.email = '',
+                            this.tip = 'user',
+                            this.password = ''
                             
                 }).catch(error => {
                     // Handle any errors
                     console.error('greska!',error);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Uneli ste nedozvoljen tip fajla!',
-                    });
                 });
             },
-            // dodajPost() {
-
-            //     const postData = {
-            //         naslov: this.naslov,
-            //         opis: this.opis,
-            //         content: this.content,
-            //         tip: this.tip,
-            //         statusPosta: this.statusPosta,
-            //         // slika: URL.createObjectURL(this.slika) ,
-            //         slika: this.slika,
-            //         datumKreiranja: this.datumKreiranja,
-            //     };
-
-            //     axios.post('/adminPanel/blog/napraviBlog', postData, {
-            //             headers: {
-            //             'X-CSRF-TOKEN': csrfToken,
-            //             // 'Content-Type': 'multipart/form-data',
-            //         }
-            //     }).then(response => {
-            //             console.log(response.data);
-
-            //         }).catch(error => {
-            //             // Handle any errors
-            //             console.error(error);
-            //         });
-            // },
-            
-            // dodajPost() {
-            //     if(this.naslov === '' || this.opis === '' || this.datumKreiranja === '' || this.content === '' || this.tip === '' || this.slika === '' || this.autor === '' || this.statusPosta === ''){
-            //         Swal.fire({
-            //             icon: 'warning',
-            //             title: 'Molimo Vas da popunite sva polja.',
-            //         })
-            //         return;
-            //     }
-            //     const postData = new FormData();
-            //     postData.append('autor', this.autor);
-            //     postData.append('naslov', this.naslov);
-            //     postData.append('opis', this.opis);
-            //     postData.append('content', this.content);
-            //     postData.append('tip', this.tip);
-            //     postData.append('statusPosta', this.statusPosta);
-            //     postData.append('slika', this.slika);
-            //     postData.append('datumKreiranja', this.datumKreiranja);
-
-            //     axios.post('/adminPanel/blog/napraviBlog', postData, {
-            //         headers: {
-            //         'X-CSRF-TOKEN': csrfToken,
-            //         'Content-Type': 'multipart/form-data',
-            //         },
-            //     }).then(response => {
-            //         console.log(response.data);
-            //         Swal.fire({
-            //                     icon: 'success',
-            //                     title: 'Uspesno ste napravili post!',
-            //                 });
-            //                 this.autor = '',
-            //                 this.naslov = '',
-            //                 this.opis = '',
-            //                 this.tip = 'Post',
-            //                 this.statusPosta =  'U pripremi',
-            //                 this.content = '',
-            //                 this.slika = null
-                            
-            //     }).catch(error => {
-            //         // Handle any errors
-            //         console.error('greska!',error);
-            //         Swal.fire({
-            //             icon: 'error',
-            //             title: 'Uneli ste nedozvoljen tip fajla!',
-            //         });
-            //     });
-            // },
-
+           
         },
         mounted() {
 

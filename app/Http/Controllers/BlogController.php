@@ -49,7 +49,7 @@ class BlogController extends Controller
               }
 
       public function AdminBlogIzmeni(Request $req){
-// dd($req);
+// dd($req); 
         // $id = $req->url();
         $url = $req->url();
         $parsedUrl = parse_url($url);
@@ -80,7 +80,7 @@ class BlogController extends Controller
           $kreirano = date('Y-m-d H:i:s');
           $objavljeno = null;
           $arhivirano = null;
-  
+   
           // $kreirano = Carbon::parse($kreirano)->toDateString();
           // $kreirano = '2023-05-15';
           if($statusPosta == 'Objavljeno'){
@@ -125,47 +125,36 @@ class BlogController extends Controller
           
           $id = $req->query('id');
           // dd($id);
-          $ime = $req->input('ime');
+          $naslov = $req->input('naslov');
+          $opis = $req->input('opis');
+          $tekst = $req->input('content');
+          // $tekst = Str::of($tekst)->stripTags();
           $tip = $req->input('tip');
-  
+
+          $urlSlika = null; 
+          
+          $req->validate([
+            'slika' => 'required|image|mimes:jpg,jpeg,png,svg,webp'
+          ]);
+
+          // dd($req->all());
+          if ($req->hasFile('slika')) {
+              $file = $req->file('slika');
+              $extention = $file->getClientOriginalExtension();
+              $filename = time().'.'.$extention;
+              // $file->move("storage/uploads". '/' . $id . '/' , $filename);
+              $file->move("storage/uploads/" . $id . '/', $filename);
+              $urlSlika = '/storage/uploads/' . $id . '/' . $filename; // Generate the URL for the uploaded picture
+              // $file->save();
+
+              // dd($urlSlika);
+          }
+
           $agencijaBlog = new AgencijaBlog;
-          $agencijaBlog->azurirajKorisnika($id, $ime, $tip);
-  
+          $agencijaBlog->azurirajPost($id, $naslov, $opis, $tekst, $tip, $urlSlika);
+
           // return redirect('/blog');
           return response()->json(['success' => true]);
-      }
-
-      public function AdminKorisnikIzmeni(Request $req){
-        // dd($req);
-        $url = $req->url();
-        $parsedUrl = parse_url($url);
-        $path = $parsedUrl['path'];
-        $id = basename($path);
-
-        $query = new agencijaBlog;
-        $data = $query->korisnikIzmena($id);  
-
-        // dd($data);
-
-        return view('izmeniKorisnika', ['data' => $data]);
-
-        // return view("kreirajBlog");
-          
-      }
-
-      public function sacuvajIzmenuKorisnika(Request $req)
-      {  
-          
-        $id = $req->query('id');
-
-        $ime = $req->input('ime');
-        $tip = $req->input('tip');
-// dd($id);
-        $agencijaBlog = new AgencijaBlog;
-        $agencijaBlog->azurirajKorisnika($id, $ime, $tip);
-
-        // return redirect('/blog');
-        return response()->json(['success' => true]);
       }
 
 }

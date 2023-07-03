@@ -109,6 +109,9 @@ import { VueEditor } from "vue2-editor";
             }
         },
         methods: {
+            reloadPage() {
+               window.location.reload();
+            },
             formatDate(date) {
                 return moment(date).format('DD.MM.YYYY HH:mm');
             },
@@ -149,7 +152,7 @@ import { VueEditor } from "vue2-editor";
                         icon: 'warning',
                         title: 'Molimo Vas da popunite sva polja.',
                     })
-                    return;
+                    return; 
                 }
                 const postData = new FormData();
                 postData.append('autor', this.autor);
@@ -171,15 +174,11 @@ import { VueEditor } from "vue2-editor";
                     Swal.fire({
                                 icon: 'success',
                                 title: 'Uspesno ste napravili post!',
-                            });
-                            this.autor = '',
-                            this.naslov = '',
-                            this.opis = '',
-                            this.tip = 'Post',
-                            this.statusPosta =  'U pripremi',
-                            this.content = '',
-                            this.slika = null
-                            
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    this.reloadPage();
+                                } 
+                            })    
                 }).catch(error => {
                     // Handle any errors
                     console.error('greska!',error);
