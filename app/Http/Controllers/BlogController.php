@@ -122,7 +122,7 @@ class BlogController extends Controller
   
    public function sacuvajIzmenuBlog(Request $req)
       {   
-          
+          // dd($req->all());
           $id = $req->query('id');
           // dd($id);
           $naslov = $req->input('naslov');
@@ -154,7 +154,7 @@ class BlogController extends Controller
           else {
             $urlSlika = $req->input('slika');
           }
-
+// dd($urlSlika);
           $agencijaBlog = new AgencijaBlog;
           $agencijaBlog->azurirajPost($id, $naslov, $opis, $tekst, $tip, $urlSlika);
 

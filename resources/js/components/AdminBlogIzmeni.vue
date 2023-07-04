@@ -2,10 +2,6 @@
     <div>
  
         <form class="border p-4 rounded m-4" method="POST" enctype="multipart/form-data">
-    
-            <!-- <select disabled id="inputState" name="id" class="form-control" v-model="id">
-                <option v-for="item in data" :value="item.id">{{ item.id }}</option>
-            </select> -->
 
             <div class="col mb-3 mt-3">
                 <label for="inputState">ID posta: </label>
@@ -40,25 +36,19 @@
                 </select>
             </div>
 
-
-            <!-- <div class="mb-3">
-                <label for="formFile" class="form-label">Promeni sliku</label>
-                <input v-on:change="dodajSliku" class="form-control" name="slika" type="file" id="formFile" :value="slika">
-            </div>
-
-            <div class="mb-3">
-                <label><b>Trenutna slika:</b></label><br>
-                <img type="file" v-for="d in data" style="width: 350px; height: auto;" :src=d.urlSlika />
-            </div> -->
-
             <div class="mb-3">
                 <label for="formFile" class="form-label"><b>Ukoliko zelite da promenite sliku, izaberite novu sliku ovde:</b></label>
                 <input v-on:change="dodajSliku" class="form-control" name="slika" type="file" id="formFile">
             </div>
 
-                <div class="mb-3">
-                <label v-for="d in data" ><b>Trenutna slika:</b> {{ d.urlSlika }} </label><br>
+            <div class="mb-3">
+                <label><b>Trenutna slika:</b></label><br>
                 <img type="file" v-for="d in data" style="width: 350px; height: auto;" :src=d.urlSlika />
+            </div>
+
+            <div class="mb-3" v-if="novaSlika">
+                <label><b>Nova slika:</b></label><br>
+                <img style="width: 350px; height: auto;" :src="novaSlika" />
             </div>
 
             
@@ -104,6 +94,7 @@ import { VueEditor } from "vue2-editor";
                 autor: '',
                 id: this.data.length > 0 ? this.data[0].id : null,
                 greske: {},
+                novaSlika: '',
             }
         },
         methods: {
@@ -113,8 +104,18 @@ import { VueEditor } from "vue2-editor";
             formatDate(date) {
                 return moment(date).format('DD.MM.YYYY HH:mm');
             },
+            // dodajSliku(event) {
+            //     this.slika = event.target.files[0];
+            //     this.novaSlika = URL.createObjectURL(this.slika);
+            // },
             dodajSliku(event) {
                 this.slika = event.target.files[0];
+                if (event.target.files.length > 0) {
+                    this.novaSlika = URL.createObjectURL(this.slika);
+                } 
+                else {
+                    this.novaSlika = '';
+                }
             },
             izmeniPost() {
                 if(this.naslov === '' || this.content === '' || this.tip === ''){
@@ -138,7 +139,7 @@ import { VueEditor } from "vue2-editor";
                 postData.append('content', this.content);
                 postData.append('tip', this.tip);
                 postData.append('slika', this.slika);
-
+    
                 axios.post('/adminPanel/blog/sacuvajIzmenuBloga', postData, {
                     params: {
                         // id: this.data[0]

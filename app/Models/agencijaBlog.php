@@ -20,7 +20,7 @@ class agencijaBlog extends Model
 
     public function postPrikaz($id){
 
-        $query =  DB::table('posts')->select('posts.id','posts.naslov', 'posts.opis', 'posts.created_at', 'posts.tipPosta' , 'posts.tekst', 'posts.urlSlika' ,  DB::raw('CONCAT(autori.ime, " ", autori.prezime) AS "kolona"'))->leftJoin('autori', 'autori.id', '=', 'posts.autorID')->where('posts.id', $id)->get();
+        $query =  DB::table('posts')->select('posts.id','posts.naslov', 'posts.Status', 'posts.opis', 'posts.created_at', 'posts.tipPosta' , 'posts.tekst', 'posts.urlSlika' ,  DB::raw('CONCAT(autori.ime, " ", autori.prezime) AS "kolona"'))->leftJoin('autori', 'autori.id', '=', 'posts.autorID')->where('posts.id', $id)->get();
         // dd($query);
 
         return $query;

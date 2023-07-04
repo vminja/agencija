@@ -21,6 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//// 
+//MIDDLEWARE user
+////// 
+
 Route::middleware('auth', 'isUser')->group(function() {
 
 Route::get('/osiguranje', [PolisaOsiguranjaController::class, 'prikaz']);
@@ -42,8 +46,9 @@ Route::post('/adminPanel/blog/napraviBlog', [BlogController::class, 'napraviNovi
 });
 
 //// 
-//MIDDLEWARE
+//MIDDLEWARE admin
 ////// 
+
 Route::middleware('auth', 'isAdmin')->group(function() {
 
 Route::get('/adminPanel/polise', [AdminPanelController::class, 'svePolise']);

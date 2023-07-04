@@ -14,7 +14,7 @@
                 <th>Datum objavljivanja</th>
                 <th>Cover</th>
                 <th>Akcija</th>
-            </tr>
+            </tr> 
             </thead>
             <tbody>
             
@@ -128,7 +128,7 @@ var csrfToken = $('meta[name="csrf-token"]').attr('content');
                                     return '<div class="dropdown">' +
                                         '<button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown">Akcija</button>' +
                                         '<div class="dropdown-menu">' +
-                                        '<a type="button" class="dropdown-item" href="/adminPanel/blog/prikaziIzabraniBlog/' + row.id + '">Pregled</a>' +
+                                        '<a type="button" class="dropdown-item" href="/blog/prikaziIzabraniBlog/' + row.id + '">Pregled</a>' +
                                         '<a type="button" class="dropdown-item" href="/adminPanel/blog/izmeniBlog/' + row.id + '">Izmeni</a>' +
                                         '<a type="button" class="dropdown-item obrisi" data-entry-id="' + row.id + '">Obrisi</a>' +
                                         '<a type="button" class="dropdown-item objavi" data-entry-id="' + row.id + '">Objavi</a>' +

@@ -29,6 +29,10 @@
                     <label v-for="d in data"><b>Datum kreiranja posta: </b>{{ formatDate(d.created_at) }}</label>
                 </div>
                 
+                <div class="col mb-3 mt-3">
+                    <label v-for="d in data"><b>Status posta: </b>{{ d.Status }}</label>
+                </div>
+
                 <div class="mb-3 d-grid gap-2 col-4 mx-auto">
                     <a type="button" class="btn btn-success text-white" href="/blog">Nazad</a>
                 </div>
