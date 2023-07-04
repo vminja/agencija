@@ -13,7 +13,7 @@ class AddCityToTestTable extends Migration
      */
     public function up()
     {
-        Schema::table('test', function (Blueprint $table) {
+        Schema::table('tests', function (Blueprint $table) {
             $table->string('city', 50)->nullable();
         });
     }
@@ -25,8 +25,8 @@ class AddCityToTestTable extends Migration
      */
     public function down()
     {
-        Schema::table('test', function (Blueprint $table) {
-            $table->dropColumn('city');
+        Schema::table('tests', function (Blueprint $table) {
+            // $table->dropColumn('city');
         });
     }
 }
