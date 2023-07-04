@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Autor;
+use App\Models\Animal;
 use Illuminate\Database\Seeder;
 
-class AutorSeeder extends Seeder
+class AnimalSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class AutorSeeder extends Seeder
      */
     public function run()
     {
-        Autor::factory(5)->create();
+        // Animal::factory(10)->create();
     }
 }
