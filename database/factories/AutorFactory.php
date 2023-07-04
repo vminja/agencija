@@ -18,7 +18,7 @@ class AutorFactory extends Factory
             'prezime' => $this->faker->lastName(),
             'telefon' => $this->faker->phoneNumber(),
             'adresa' => $this->faker->streetAddress(),
-            'created_at' => $this->faker->dateTimeBetween($startDate = 'now', $endDate = 'now', $timezone = null) 
+            'created_at' => now() 
         ];
     }
 }
