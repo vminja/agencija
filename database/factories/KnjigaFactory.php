@@ -18,7 +18,7 @@ class KnjigaFactory extends Factory
             'imeAutora' => $this->faker->title(),
             'prezimeAutora' => $this->faker->lastName(),
             'izdavac' => $this->faker->word(),
-            'godinaRodjenja' => $this->faker->year($max = 'now'),
+            'godinaRodjenja' => $this->faker->dateTime($max = 'now'),
             'created_at' => now() 
         ];
     }

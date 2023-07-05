@@ -14,7 +14,7 @@ class AddGodinaToKnjigeTable extends Migration
     public function up()
     {
         Schema::table('knjige', function (Blueprint $table) {
-            $table->string('godinaRodjenja', 20)->nullable()->after('prezimeAutora');
+            $table->dateTime('godinaRodjenja')->nullable()->after('prezimeAutora')->change();
         });
     }
 
