@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCityToTestTable extends Migration
+class DropGodinaRodjenjaInKnjigeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddCityToTestTable extends Migration
      */
     public function up()
     {
-        Schema::table('tests', function (Blueprint $table) {
-            $table->string('city', 50)->nullable();
+        Schema::table('knjige', function (Blueprint $table) {
+            $table->dropColumn('godinaRodjenja');
         });
     }
 
@@ -25,8 +25,8 @@ class AddCityToTestTable extends Migration
      */
     public function down()
     {
-        Schema::table('tests', function (Blueprint $table) {
-            // $table->dropColumn('city');
+        Schema::table('knjige', function (Blueprint $table) {
+            //
         });
     }
 }

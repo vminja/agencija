@@ -15,7 +15,7 @@ class AnimalFactory extends Factory
     {
         return [
             'name' => $this->faker->firstName(),
-            'family' => $this->faker->lastName(),
+            'family' => $this->faker->word(),
             'species' => $this->faker->word(),
             'created_at' => now() 
         ];
